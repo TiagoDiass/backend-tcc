@@ -6,7 +6,7 @@ describe('Transaction entity', () => {
       title: 'Compras de alguns medicamentos',
       value: 5000, // 50 reais
       type: 'withdraw',
-      date: '2021-05-14 12:58:15',
+      date: '2019-10-01',
     });
 
     expect(transaction.id).toBeTruthy();
@@ -14,7 +14,7 @@ describe('Transaction entity', () => {
       title: 'Compras de alguns medicamentos',
       value: 5000,
       type: 'withdraw',
-      date: '2021-05-14 12:58:15',
+      date: '2019-10-01',
     });
   });
 
@@ -24,7 +24,7 @@ describe('Transaction entity', () => {
       title: 'Compras',
       value: 3500,
       type: 'deposit',
-      date: '2021-05-18 19:15:00',
+      date: '2021-05-18',
     });
 
     expect(transaction).toMatchObject({
@@ -32,7 +32,7 @@ describe('Transaction entity', () => {
       title: 'Compras',
       value: 3500,
       type: 'deposit',
-      date: '2021-05-18 19:15:00',
+      date: '2021-05-18',
     });
   });
 
@@ -45,14 +45,16 @@ describe('Transaction entity', () => {
         title: 'titulo da transação',
         value: 3500,
         type: 'deposit',
-        date: '2021-05-18 19:15:00',
+        date: '2021-05-18',
       });
     } catch (err) {
       error = err;
     }
 
     expect(error.message).toBe('Transação inválida');
-    expect(error.errorsList).toEqual(['ID deve estar no padrão UUID V4']);
+    expect(error.errorsList).toEqual([
+      'ID da transação deve estar no padrão UUID V4',
+    ]);
   });
 
   it('should return an InvalidTransactionError if title has less than 5 characters', () => {
@@ -63,7 +65,7 @@ describe('Transaction entity', () => {
         title: 'xii',
         value: 3500,
         type: 'deposit',
-        date: '2021-05-18 19:15:00',
+        date: '2021-05-18',
       });
     } catch (err) {
       error = err;
@@ -83,7 +85,7 @@ describe('Transaction entity', () => {
         title: 'Comprinhas',
         value: -5,
         type: 'deposit',
-        date: '2021-05-18 19:15:00',
+        date: '2021-05-18',
       });
     } catch (err) {
       error = err;
@@ -92,6 +94,26 @@ describe('Transaction entity', () => {
     expect(error.message).toBe('Transação inválida');
     expect(error.errorsList).toEqual([
       'valor da transação deve ser maior que zero',
+    ]);
+  });
+
+  it('should return an InvalidTransactionError if date is not in the correct format(YYYY-MM-DD)', () => {
+    let error;
+
+    try {
+      new Transaction({
+        title: 'Comprinhas',
+        value: 15,
+        type: 'deposit',
+        date: '15/12/2021',
+      });
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error.message).toBe('Transação inválida');
+    expect(error.errorsList).toEqual([
+      'data da transação deve estar no formato yyyy-mm-dd',
     ]);
   });
 });

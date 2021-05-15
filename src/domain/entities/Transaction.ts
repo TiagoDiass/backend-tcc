@@ -10,6 +10,10 @@ export interface ITransactionProperties {
   date: string;
 }
 
+type FieldValidationReturn = {
+  errors: string[];
+};
+
 export default class Transaction {
   public id: string;
   public title: string;
@@ -53,6 +57,9 @@ export default class Transaction {
 
       const typeValidation = this.typeValidation(this.type);
       errors.push(...typeValidation.errors);
+
+      const dateValidation = this.dateValidation(this.date);
+      errors.push(...dateValidation.errors);
     } catch (error) {
       console.log(error);
       errors.push(error.message);
@@ -61,13 +68,15 @@ export default class Transaction {
     return errors;
   }
 
-  private idValidation(id: string) {
+  private idValidation(id: string): FieldValidationReturn {
     return {
-      errors: Validations.id(id) ? [] : ['ID deve estar no padrão UUID V4'],
+      errors: Validations.id(id)
+        ? []
+        : ['ID da transação deve estar no padrão UUID V4'],
     };
   }
 
-  private titleValidation(title: string) {
+  private titleValidation(title: string): FieldValidationReturn {
     let errors: string[] = [];
 
     if (typeof title !== 'string') {
@@ -81,13 +90,13 @@ export default class Transaction {
     };
   }
 
-  private valueValidation(value: number) {
+  private valueValidation(value: number): FieldValidationReturn {
     return {
       errors: value <= 0 ? ['valor da transação deve ser maior que zero'] : [],
     };
   }
 
-  private typeValidation(type: string) {
+  private typeValidation(type: string): FieldValidationReturn {
     let errors: string[] = [];
 
     if (typeof type !== 'string') {
@@ -98,6 +107,14 @@ export default class Transaction {
 
     return {
       errors,
+    };
+  }
+
+  private dateValidation(date: string): FieldValidationReturn {
+    return {
+      errors: Validations.date_YYYY_MM_DD(date)
+        ? []
+        : ['data da transação deve estar no formato yyyy-mm-dd'],
     };
   }
 }
