@@ -1,5 +1,5 @@
 import InvalidTransactionError from 'domain/exceptions/InvalidTransactionError';
-import Validations from 'lib/utils/Validations';
+import { Validations } from 'lib/utils';
 import { v4 as uuid } from 'uuid';
 
 export interface ITransactionProperties {

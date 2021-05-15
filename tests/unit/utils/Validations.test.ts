@@ -1,4 +1,4 @@
-import Validations from 'lib/utils/Validations';
+import { Validations } from 'lib/utils';
 
 describe('Validations utils tests', () => {
   describe('id(uuid) validation', () => {
