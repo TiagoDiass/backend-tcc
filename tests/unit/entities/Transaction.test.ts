@@ -36,7 +36,7 @@ describe('Transaction entity', () => {
     });
   });
 
-  it('should return an InvalidTransactionError if id is not an UUID', () => {
+  it('should throw an InvalidTransactionError if id is not an UUID', () => {
     let error;
 
     try {
@@ -57,7 +57,7 @@ describe('Transaction entity', () => {
     ]);
   });
 
-  it('should return an InvalidTransactionError if title has less than 5 characters', () => {
+  it('should throw an InvalidTransactionError if title has less than 5 characters', () => {
     let error;
 
     try {
@@ -77,7 +77,7 @@ describe('Transaction entity', () => {
     ]);
   });
 
-  it('should return an InvalidTransactionError if value is not greater than 0', () => {
+  it('should throw an InvalidTransactionError if value is not greater than 0', () => {
     let error;
 
     try {
@@ -97,7 +97,7 @@ describe('Transaction entity', () => {
     ]);
   });
 
-  it('should return an InvalidTransactionError if date is not in the correct format(YYYY-MM-DD)', () => {
+  it('should throw an InvalidTransactionError if date is not in the correct format(YYYY-MM-DD)', () => {
     let error;
 
     try {
