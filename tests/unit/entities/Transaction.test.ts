@@ -1,4 +1,7 @@
-import Transaction from 'domain/entities/Transaction';
+import Transaction, {
+  ITransactionProperties,
+} from 'domain/entities/Transaction';
+import InvalidTransactionError from 'domain/exceptions/InvalidTransactionError';
 
 describe('Transaction entity', () => {
   it('should instantiate a new Transaction correctly', () => {
@@ -34,5 +37,47 @@ describe('Transaction entity', () => {
       type: 'deposit',
       date: '2021-05-18 19:15:00',
     });
+  });
+
+  it('should return an InvalidTransactionError if title has less than 5 characters', () => {
+    let error;
+
+    try {
+      new Transaction({
+        id: 'a little id',
+        title: 'xii',
+        value: 3500,
+        type: 'deposit',
+        date: '2021-05-18 19:15:00',
+      });
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error.message).toBe('Transação inválida');
+    expect(error.errorsList).toEqual([
+      'título da transação deve conter pelo menos 5 caracteres',
+    ]);
+  });
+
+  it('should return an InvalidTransactionError if value is not greater than 0', () => {
+    let error;
+
+    try {
+      new Transaction({
+        id: 'a little id',
+        title: 'Comprinhas',
+        value: -5,
+        type: 'deposit',
+        date: '2021-05-18 19:15:00',
+      });
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error.message).toBe('Transação inválida');
+    expect(error.errorsList).toEqual([
+      'valor da transação deve ser maior que zero',
+    ]);
   });
 });
