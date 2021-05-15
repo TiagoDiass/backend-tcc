@@ -1,0 +1,19 @@
+{
+  "name": "backend-tcc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tiago Dias",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "git-commit-msg-linter": "^3.1.0",
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.2.4"
+  }
+}
