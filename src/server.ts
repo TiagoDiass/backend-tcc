@@ -1,4 +1,3 @@
-import express from 'express';
-const app = express();
-app.get('/', (req, res) => res.json({ ok: 'hello world' }));
+import app from 'app';
+
 app.listen(3333);
