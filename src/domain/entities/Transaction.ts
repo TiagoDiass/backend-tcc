@@ -1,4 +1,5 @@
 import InvalidTransactionError from 'domain/exceptions/InvalidTransactionError';
+import Validations from 'lib/utils/Validations';
 import { v4 as uuid } from 'uuid';
 
 export interface ITransactionProperties {
@@ -41,6 +42,9 @@ export default class Transaction {
     let errors: string[] = [];
 
     try {
+      const idValidation = this.idValidation(this.id);
+      errors.push(...idValidation.errors);
+
       const titleValidation = this.titleValidation(this.title);
       errors.push(...titleValidation.errors);
 
@@ -55,6 +59,12 @@ export default class Transaction {
     }
 
     return errors;
+  }
+
+  private idValidation(id: string) {
+    return {
+      errors: Validations.id(id) ? [] : ['ID deve estar no padrão UUID V4'],
+    };
   }
 
   private titleValidation(title: string) {

@@ -1,7 +1,4 @@
-import Transaction, {
-  ITransactionProperties,
-} from 'domain/entities/Transaction';
-import InvalidTransactionError from 'domain/exceptions/InvalidTransactionError';
+import Transaction from 'domain/entities/Transaction';
 
 describe('Transaction entity', () => {
   it('should instantiate a new Transaction correctly', () => {
@@ -23,7 +20,7 @@ describe('Transaction entity', () => {
 
   it('should instantiate a new Transaction correctly passing an id in parameters', () => {
     const transaction = new Transaction({
-      id: 'a little id',
+      id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
       title: 'Compras',
       value: 3500,
       type: 'deposit',
@@ -31,7 +28,7 @@ describe('Transaction entity', () => {
     });
 
     expect(transaction).toMatchObject({
-      id: 'a little id',
+      id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
       title: 'Compras',
       value: 3500,
       type: 'deposit',
@@ -39,12 +36,30 @@ describe('Transaction entity', () => {
     });
   });
 
+  it('should return an InvalidTransactionError if id is not an UUID', () => {
+    let error;
+
+    try {
+      new Transaction({
+        id: 'id sem ser uuid',
+        title: 'titulo da transação',
+        value: 3500,
+        type: 'deposit',
+        date: '2021-05-18 19:15:00',
+      });
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error.message).toBe('Transação inválida');
+    expect(error.errorsList).toEqual(['ID deve estar no padrão UUID V4']);
+  });
+
   it('should return an InvalidTransactionError if title has less than 5 characters', () => {
     let error;
 
     try {
       new Transaction({
-        id: 'a little id',
         title: 'xii',
         value: 3500,
         type: 'deposit',
@@ -65,7 +80,6 @@ describe('Transaction entity', () => {
 
     try {
       new Transaction({
-        id: 'a little id',
         title: 'Comprinhas',
         value: -5,
         type: 'deposit',
