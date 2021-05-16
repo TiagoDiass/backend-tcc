@@ -1,6 +1,6 @@
 import IServiceRepository from 'domain/ports/ServiceRepository';
 import CreateService from 'domain/services/CreateService';
-import { ServiceDTO } from 'domain/services/dto';
+import { IRequestCreateServiceDTO } from 'domain/services/dto';
 import ListServices from 'domain/services/ListServices';
 
 type ControllerMethodResult = {
@@ -49,7 +49,9 @@ export default class ServiceController {
     }
   }
 
-  async createService(service: ServiceDTO): Promise<ControllerMethodResult> {
+  async createService(
+    service: IRequestCreateServiceDTO
+  ): Promise<ControllerMethodResult> {
     const createServiceService = new CreateService(this.serviceRepository);
 
     try {

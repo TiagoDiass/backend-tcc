@@ -1,1 +1,1 @@
-export { default as ServiceDTO } from './ServiceDTO';
+export * from './ServicesDTOs';

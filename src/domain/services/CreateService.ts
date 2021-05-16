@@ -1,14 +1,13 @@
 import Service from 'domain/entities/Service';
-import InvalidServiceError from 'domain/exceptions/InvalidServiceError';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import { ServiceDTO } from './dto';
+import { IRequestCreateServiceDTO } from './dto';
 import { DomainServiceResult } from './types';
 
 export default class CreateService {
   constructor(private readonly serviceRepository: IServiceRepository) {}
 
   public async execute(
-    serviceDTO: ServiceDTO
+    serviceDTO: IRequestCreateServiceDTO
   ): Promise<DomainServiceResult<Service>> {
     try {
       const service = new Service(serviceDTO);
