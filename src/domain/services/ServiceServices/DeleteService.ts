@@ -31,6 +31,13 @@ export default class DeleteService {
         status: 200,
         result: repoResult.data,
       };
-    } catch (error) {}
+    } catch (error) {
+      return {
+        status: 500,
+        error: {
+          message: error.message,
+        },
+      };
+    }
   }
 }

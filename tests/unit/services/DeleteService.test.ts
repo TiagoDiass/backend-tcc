@@ -54,4 +54,24 @@ describe('DeleteService service', () => {
       },
     });
   });
+
+  it('should return correctly if an exception occurs', async () => {
+    const serviceRepositoryMock = {
+      ...mockServiceRepository(),
+      findById: jest.fn().mockImplementation(() => {
+        throw new Error('Erro mockado');
+      }),
+    };
+
+    const deleteService = new DeleteService(serviceRepositoryMock);
+
+    const response = await deleteService.execute({ id: faker.datatype.uuid() });
+
+    expect(response).toEqual({
+      status: 500,
+      error: {
+        message: 'Erro mockado',
+      },
+    });
+  });
 });
