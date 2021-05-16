@@ -1,18 +1,16 @@
-import Service from 'domain/entities/Service';
 import ListServices from 'domain/services/ListServices';
+import { mockService, mockServiceRepository } from '../../utils/servicesMocks';
 
 describe('ListServices Service', () => {
   it('should call serviceRepository.list() and return correctly', async () => {
-    const servicesToBeReturned = [
-      new Service({ title: 'Serviço bom', description: 'Serviço monstro' }),
-      new Service({ title: 'Serviço ruim', description: 'Serviço chato' }),
-    ];
+    const servicesToBeReturned = [mockService(), mockService()];
 
     const serviceRepositoryMock = {
+      ...mockServiceRepository(),
+
       list: jest.fn().mockResolvedValue({
         data: servicesToBeReturned,
       }),
-      save: jest.fn(),
     };
 
     const listServices = new ListServices(serviceRepositoryMock);

@@ -1,5 +1,6 @@
 import CreateService from 'domain/services/CreateService';
 import { IRequestCreateServiceDTO } from 'domain/services/dto';
+import { mockServiceRepository } from '../../utils/servicesMocks';
 
 const mockedUUID = '1e16f407-1cef-427c-af39-e9c3efcbd18e';
 
@@ -10,7 +11,8 @@ jest.mock('uuid', () => ({
 describe('CreateService service', () => {
   it('should call serviceRepository.save() and return correctly', async () => {
     const serviceRepositoryMock = {
-      list: jest.fn(),
+      ...mockServiceRepository(),
+
       save: jest.fn().mockImplementationOnce(service => ({
         data: service,
       })), // mocking repository.save(), it will keep returning the created service
@@ -42,10 +44,7 @@ describe('CreateService service', () => {
   });
 
   it('should return correctly if Service entity throws an exception', async () => {
-    const serviceRepositoryMock = {
-      list: jest.fn(),
-      save: jest.fn(),
-    };
+    const serviceRepositoryMock = mockServiceRepository();
 
     const createService = new CreateService(serviceRepositoryMock);
 
@@ -66,7 +65,8 @@ describe('CreateService service', () => {
 
   it('should return correctly if repository throws an exception', async () => {
     const serviceRepositoryMock = {
-      list: jest.fn(),
+      ...mockServiceRepository(),
+
       save: jest.fn().mockImplementationOnce(() => {
         throw new Error('Erro mockado');
       }),
