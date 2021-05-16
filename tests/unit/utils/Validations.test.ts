@@ -7,10 +7,11 @@ describe('Validations utils tests', () => {
   });
 
   it('date YYYY_MM_DD validation', () => {
-    expect(Validations.date_YYYY_MM_DD('2019-10-01')).toBe(true);
-    expect(Validations.date_YYYY_MM_DD('2019-17-02')).toBe(false);
-    expect(Validations.date_YYYY_MM_DD('2019-14-01')).toBe(false);
-    expect(Validations.date_YYYY_MM_DD('12/05/2020')).toBe(false);
+    expect(Validations.date_YYYY_MM_DD('2021-10-01')).toBe(true);
+    expect(Validations.date_YYYY_MM_DD('2021-06-31')).toBe(true); // date-fns will format this to 2021-07-01
+    expect(Validations.date_YYYY_MM_DD('2021-17-02')).toBe(false);
+    expect(Validations.date_YYYY_MM_DD('2021-14-01')).toBe(false);
+    expect(Validations.date_YYYY_MM_DD('12/05/2021')).toBe(false);
     expect(Validations.date_YYYY_MM_DD('2019')).toBe(false);
     expect(Validations.date_YYYY_MM_DD('2')).toBe(false);
   });

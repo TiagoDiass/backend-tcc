@@ -1,5 +1,4 @@
 import { format } from 'date-fns';
-import { enUS, ptBR } from 'date-fns/locale';
 
 export default class Validations {
   /**
