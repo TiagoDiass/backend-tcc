@@ -5,13 +5,15 @@
   "author": "Tiago Dias",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "dev": "cross-env NODE_PATH=./src/ tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "test": "jest --no-cache",
     "test:watch": "yarn test --watch",
     "test:band": "yarn test --runInBand"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "date-fns": "^2.21.3",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "uuid": "^8.3.2"
   },
