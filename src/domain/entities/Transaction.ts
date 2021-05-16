@@ -43,7 +43,7 @@ export default class Transaction {
   }
 
   private validate() {
-    let errors: string[] = [];
+    const errors: string[] = [];
 
     try {
       const idValidation = this.idValidation(this.id);
@@ -77,7 +77,7 @@ export default class Transaction {
   }
 
   private titleValidation(title: string): FieldValidationReturn {
-    let errors: string[] = [];
+    const errors: string[] = [];
 
     if (typeof title !== 'string') {
       errors.push('título da transação deve ser uma string');
@@ -97,7 +97,7 @@ export default class Transaction {
   }
 
   private typeValidation(type: string): FieldValidationReturn {
-    let errors: string[] = [];
+    const errors: string[] = [];
 
     if (typeof type !== 'string') {
       errors.push('tipo da transação deve ser uma string');
@@ -111,10 +111,16 @@ export default class Transaction {
   }
 
   private dateValidation(date: string): FieldValidationReturn {
+    const errors: string[] = [];
+
+    if (typeof date !== 'string') {
+      errors.push('título da transação deve ser uma string');
+    } else if (!Validations.date_YYYY_MM_DD(date)) {
+      errors.push('data da transação deve estar no formato yyyy-mm-dd');
+    }
+
     return {
-      errors: Validations.date_YYYY_MM_DD(date)
-        ? []
-        : ['data da transação deve estar no formato yyyy-mm-dd'],
+      errors,
     };
   }
 }
