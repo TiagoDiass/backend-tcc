@@ -49,12 +49,14 @@ export default class ServiceController {
   }
 
   async createService(
-    service: IRequestCreateServiceDTO
+    createServiceDTO: IRequestCreateServiceDTO
   ): Promise<ControllerMethodResult> {
     const createServiceService = new CreateService(this.serviceRepository);
 
     try {
-      const createServiceResponse = await createServiceService.execute(service);
+      const createServiceResponse = await createServiceService.execute(
+        createServiceDTO
+      );
 
       const response: ControllerMethodResult = {
         status:
