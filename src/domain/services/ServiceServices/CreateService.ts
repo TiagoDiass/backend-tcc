@@ -7,10 +7,10 @@ export default class CreateService {
   constructor(private readonly serviceRepository: IServiceRepository) {}
 
   public async execute(
-    serviceDTO: IRequestCreateServiceDTO
+    createServiceDTO: IRequestCreateServiceDTO
   ): Promise<DomainServiceResult<Service>> {
     try {
-      const service = new Service(serviceDTO);
+      const service = new Service(createServiceDTO);
 
       const repoResult = await this.serviceRepository.save(service);
 
