@@ -26,7 +26,7 @@ describe('ListServices Service', () => {
     });
   });
 
-  it('should call return correctly in cases of error', async () => {
+  it('should return correctly in cases of error', async () => {
     const serviceRepositoryMock = {
       list: jest.fn().mockImplementation(() => {
         throw new Error('Erro mockado');
