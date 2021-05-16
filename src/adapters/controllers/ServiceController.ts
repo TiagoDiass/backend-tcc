@@ -1,49 +1,89 @@
-import { Request, Response } from 'express';
-import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import ListServices from 'domain/services/ListServices';
 import CreateService from 'domain/services/CreateService';
+import { ServiceDTO } from 'domain/services/dto';
+import ListServices from 'domain/services/ListServices';
 
-interface ServiceDTO {
-  title: string;
-  description?: string;
-}
+type ControllerMethodResult = {
+  status: number;
+  result: {
+    message: string;
+    data?: any;
+    errors?: string[];
+  };
+};
 
 export default class ServiceController {
   constructor(private readonly serviceRepository: IServiceRepository) {}
 
-  async listServices(req: Request, res: Response) {
-    const listServices = new ListServices(this.serviceRepository);
-    const services = await listServices.execute();
-
-    return res.status(200).json({
-      message: 'Lista de serviços obtida com sucesso',
-      data: {
-        services,
-      },
-    });
-  }
-
-  async createService(req: Request, res: Response) {
-    const createService = new CreateService(this.serviceRepository);
+  async listServices(): Promise<ControllerMethodResult> {
+    const listServicesService = new ListServices(this.serviceRepository);
 
     try {
-      const service = new Service({
-        title: req.body.title,
-        description: req.body.description,
-      });
+      const listServicesResponse = await listServicesService.execute();
 
-      const createdService = await createService.execute(service);
-
-      return res.status(201).json({
-        message: 'Serviço criado com sucesso',
-        data: createdService,
-      });
+      return {
+        status:
+          listServicesResponse.status === 200
+            ? 200
+            : listServicesResponse.status,
+        result: {
+          message:
+            listServicesResponse.status === 200
+              ? 'Lista de serviços obtida com sucesso'
+              : listServicesResponse.error?.message,
+          data:
+            listServicesResponse.status === 200
+              ? listServicesResponse.result
+              : [],
+        },
+      };
     } catch (error) {
-      return res.status(400).json({
-        message: error.message,
-        errors: error.errorsList || ['Erro inesperado.'],
-      });
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao executar o fluxo de listagem de serviços: ${
+            error.message || 'Erro sem mensagem...'
+          }`,
+        },
+      };
+    }
+  }
+
+  async createService(service: ServiceDTO): Promise<ControllerMethodResult> {
+    const createServiceService = new CreateService(this.serviceRepository);
+
+    try {
+      const createServiceResponse = await createServiceService.execute(service);
+
+      const response: ControllerMethodResult = {
+        status:
+          createServiceResponse.status === 201
+            ? 201
+            : createServiceResponse.status,
+        result: {
+          message:
+            createServiceResponse.status === 201
+              ? 'Serviço criado com sucesso'
+              : createServiceResponse.error?.message,
+        },
+      };
+
+      if (createServiceResponse.status === 201) {
+        response.result.data = createServiceResponse.result;
+      } else {
+        response.result.errors = createServiceResponse.error?.errorsList;
+      }
+
+      return response;
+    } catch (error) {
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao executar a criação de um serviço: ${
+            error.message || 'Erro sem mensagem...'
+          }`,
+        },
+      };
     }
   }
 }

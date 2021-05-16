@@ -1,9 +1,9 @@
 export default class InvalidServiceError extends Error {
+  public type = 'invalid-service-error';
   public errorsList: string[];
 
   constructor(errorsList: string[]) {
-    let m = 'Serviço inválido';
-    super(m);
+    super('Serviço inválido');
 
     Error.captureStackTrace(this, InvalidServiceError);
 
