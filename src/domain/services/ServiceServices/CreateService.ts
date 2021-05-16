@@ -1,7 +1,7 @@
 import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import { IRequestCreateServiceDTO } from './dto';
-import { DomainServiceResult } from './types';
+import { IRequestCreateServiceDTO } from 'domain/services/dto';
+import { DomainServiceResult } from 'domain/services/types';
 
 export default class CreateService {
   constructor(private readonly serviceRepository: IServiceRepository) {}

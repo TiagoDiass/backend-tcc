@@ -1,6 +1,6 @@
 import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import { DomainServiceResult } from './types';
+import { DomainServiceResult } from 'domain/services/types';
 
 export default class ListServices {
   constructor(private readonly serviceRepository: IServiceRepository) {}

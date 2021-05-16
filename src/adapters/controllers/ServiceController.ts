@@ -1,7 +1,6 @@
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import CreateService from 'domain/services/CreateService';
 import { IRequestCreateServiceDTO } from 'domain/services/dto';
-import ListServices from 'domain/services/ListServices';
+import { CreateService, ListServices } from 'domain/services/ServiceServices';
 
 type ControllerMethodResult = {
   status: number;

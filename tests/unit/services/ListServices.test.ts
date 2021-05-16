@@ -1,4 +1,4 @@
-import ListServices from 'domain/services/ListServices';
+import { ListServices } from 'domain/services/ServiceServices';
 import { mockService, mockServiceRepository } from '../../utils/servicesMocks';
 
 describe('ListServices Service', () => {

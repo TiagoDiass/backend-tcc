@@ -1,4 +1,4 @@
-import CreateService from 'domain/services/CreateService';
+import { CreateService } from 'domain/services/ServiceServices';
 import { IRequestCreateServiceDTO } from 'domain/services/dto';
 import { mockServiceRepository } from '../../utils/servicesMocks';
 
