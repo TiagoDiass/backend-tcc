@@ -4,4 +4,5 @@ import IRepositoryMethodResult from './RepositoryMethodResult';
 export default interface IServiceRepository {
   save(service: Service): Promise<IRepositoryMethodResult<Service>>;
   list(): Promise<IRepositoryMethodResult<Service[]>>;
+  findById(id: string): Promise<IRepositoryMethodResult<Service | null>>;
 }
