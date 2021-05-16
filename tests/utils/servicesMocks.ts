@@ -5,6 +5,8 @@ import faker from 'faker';
 export const mockServiceRepository = (): IServiceRepository => ({
   list: jest.fn(),
   save: jest.fn(),
+  findById: jest.fn(),
+  delete: jest.fn(),
 });
 
 export const mockService = (): Service =>

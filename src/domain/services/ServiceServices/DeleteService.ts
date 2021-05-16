@@ -8,7 +8,7 @@ export default class DeleteService {
 
   async execute(
     deleteServiceDTO: IRequestDeleteServiceDTO
-  ): Promise<DomainServiceResult<Service>> {
+  ): Promise<DomainServiceResult<Service['id']>> {
     try {
       const { data: serviceExists } = await this.serviceRepository.findById(
         deleteServiceDTO.id
@@ -22,6 +22,15 @@ export default class DeleteService {
           },
         };
       }
+
+      const repoResult = await this.serviceRepository.delete(
+        deleteServiceDTO.id
+      );
+
+      return {
+        status: 200,
+        result: repoResult.data,
+      };
     } catch (error) {}
   }
 }
