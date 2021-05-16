@@ -1,9 +1,9 @@
 export default class InvalidTransactionError extends Error {
+  public readonly type = 'invalid-transaction-error';
   public errorsList: string[];
 
   constructor(errorsList: string[]) {
-    let m = 'Transação inválida';
-    super(m);
+    super('Transação inválida');
 
     Error.captureStackTrace(this, InvalidTransactionError);
 

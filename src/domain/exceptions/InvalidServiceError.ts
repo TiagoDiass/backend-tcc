@@ -1,5 +1,5 @@
 export default class InvalidServiceError extends Error {
-  public type = 'invalid-service-error';
+  public readonly type = 'invalid-service-error';
   public errorsList: string[];
 
   constructor(errorsList: string[]) {
