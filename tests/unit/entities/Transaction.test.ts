@@ -1,7 +1,9 @@
 import Transaction from 'domain/entities/Transaction';
+import InvalidServiceError from 'domain/exceptions/InvalidServiceError';
+import InvalidTransactionError from 'domain/exceptions/InvalidTransactionError';
 
 describe('Transaction entity', () => {
-  it('should instantiate a new Transaction correctly', () => {
+  it('should instantiate a new Transaction correctly without passing an id', () => {
     const transaction = new Transaction({
       title: 'Compras de alguns medicamentos',
       value: 5000, // 50 reais
@@ -51,7 +53,7 @@ describe('Transaction entity', () => {
       error = err;
     }
 
-    expect(error.message).toBe('Transação inválida');
+    expect(error.type).toBe('invalid-transaction-error');
     expect(error.errorsList).toEqual([
       'ID da transação deve estar no padrão UUID V4',
     ]);
@@ -71,7 +73,7 @@ describe('Transaction entity', () => {
       error = err;
     }
 
-    expect(error.message).toBe('Transação inválida');
+    expect(error.type).toBe('invalid-transaction-error');
     expect(error.errorsList).toEqual([
       'título da transação deve conter pelo menos 5 caracteres',
     ]);
@@ -91,7 +93,7 @@ describe('Transaction entity', () => {
       error = err;
     }
 
-    expect(error.message).toBe('Transação inválida');
+    expect(error.type).toBe('invalid-transaction-error');
     expect(error.errorsList).toEqual([
       'valor da transação deve ser maior que zero',
     ]);
@@ -111,7 +113,7 @@ describe('Transaction entity', () => {
       error = err;
     }
 
-    expect(error.message).toBe('Transação inválida');
+    expect(error.type).toBe('invalid-transaction-error');
     expect(error.errorsList).toEqual([
       'data da transação deve estar no formato yyyy-mm-dd',
     ]);

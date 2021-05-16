@@ -46,7 +46,7 @@ describe('Service entity', () => {
       error = err;
     }
 
-    expect(error.message).toBe('Serviço inválido');
+    expect(error.type).toBe('invalid-service-error');
     expect(error.errorsList).toEqual([
       'ID do serviço deve estar no padrão UUID',
     ]);
@@ -64,7 +64,7 @@ describe('Service entity', () => {
       error = err;
     }
 
-    expect(error.message).toBe('Serviço inválido');
+    expect(error.type).toBe('invalid-service-error');
     expect(error.errorsList).toEqual([
       'título do serviço deve conter pelo menos 5 caracteres',
     ]);
@@ -87,7 +87,7 @@ describe('Service entity', () => {
       error = err;
     }
 
-    expect(error.message).toBe('Serviço inválido');
+    expect(error.type).toBe('invalid-service-error');
     expect(error.errorsList).toEqual([
       'descrição do serviço não deve conter mais de 150 caracteres',
     ]);
