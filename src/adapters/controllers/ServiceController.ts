@@ -21,10 +21,7 @@ export default class ServiceController {
       const listServicesResponse = await listServicesService.execute();
 
       return {
-        status:
-          listServicesResponse.status === 200
-            ? 200
-            : listServicesResponse.status,
+        status: listServicesResponse.status,
         result: {
           message:
             listServicesResponse.status === 200
@@ -40,7 +37,7 @@ export default class ServiceController {
       return {
         status: 500,
         result: {
-          message: `Erro inesperado ao executar o fluxo de listagem de serviços: ${
+          message: `Erro inesperado ao listar serviços: ${
             error.message || 'Erro sem mensagem...'
           }`,
         },
@@ -59,10 +56,7 @@ export default class ServiceController {
       );
 
       const response: ControllerMethodResult = {
-        status:
-          createServiceResponse.status === 201
-            ? 201
-            : createServiceResponse.status,
+        status: createServiceResponse.status,
         result: {
           message:
             createServiceResponse.status === 201

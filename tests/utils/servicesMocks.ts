@@ -1,5 +1,6 @@
 import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
+import { IRequestCreateServiceDTO } from 'domain/services/dto';
 import faker from 'faker';
 
 export const mockServiceRepository = (): IServiceRepository => ({
@@ -12,5 +13,10 @@ export const mockServiceRepository = (): IServiceRepository => ({
 export const mockService = (): Service =>
   new Service({
     title: faker.random.words(2),
-    description: faker.random.words(10),
+    description: faker.random.words(7),
   });
+
+export const mockCreateServiceDTO = (): IRequestCreateServiceDTO => ({
+  title: faker.random.words(2),
+  description: faker.random.words(7),
+});

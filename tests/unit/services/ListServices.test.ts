@@ -26,10 +26,11 @@ describe('ListServices Service', () => {
 
   it('should return correctly in cases of error', async () => {
     const serviceRepositoryMock = {
+      ...mockServiceRepository(),
+
       list: jest.fn().mockImplementation(() => {
         throw new Error('Erro mockado');
       }),
-      save: jest.fn(),
     };
 
     const listServices = new ListServices(serviceRepositoryMock);
