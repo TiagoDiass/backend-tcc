@@ -1,6 +1,13 @@
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import { IRequestCreateServiceDTO } from 'domain/services/dto';
-import { CreateService, ListServices } from 'domain/services/ServiceServices';
+import {
+  IRequestCreateServiceDTO,
+  IRequestDeleteServiceDTO,
+} from 'domain/services/dto';
+import {
+  CreateService,
+  DeleteService,
+  ListServices,
+} from 'domain/services/ServiceServices';
 
 type ControllerMethodResult = {
   status: number;
@@ -77,6 +84,39 @@ export default class ServiceController {
         status: 500,
         result: {
           message: `Erro inesperado ao executar a criação de um serviço: ${
+            error.message || 'Erro sem mensagem...'
+          }`,
+        },
+      };
+    }
+  }
+
+  async deleteService(
+    deleteServiceDTO: IRequestDeleteServiceDTO
+  ): Promise<ControllerMethodResult> {
+    const deleteServiceService = new DeleteService(this.serviceRepository);
+
+    try {
+      const deleteServiceResult = await deleteServiceService.execute(
+        deleteServiceDTO
+      );
+
+      return {
+        status: deleteServiceResult.status,
+        result: {
+          message:
+            deleteServiceResult.status === 200
+              ? 'Serviço excluído com sucesso'
+              : deleteServiceResult.error?.message,
+
+          data: deleteServiceResult.result || null,
+        },
+      };
+    } catch (error) {
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao excluir serviço: ${
             error.message || 'Erro sem mensagem...'
           }`,
         },

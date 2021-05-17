@@ -27,4 +27,33 @@ export default class MemoryServiceRepository implements IServiceRepository {
       });
     });
   }
+
+  findById(id: string): Promise<IRepositoryMethodResult<Service | null>> {
+    return new Promise(resolve => {
+      const foundService = this.services.find(service => service.id === id);
+
+      resolve({
+        status: foundService ? 200 : 404,
+        data: foundService || null,
+      });
+    });
+  }
+
+  delete(id: string): Promise<IRepositoryMethodResult<string>> {
+    return new Promise(resolve => {
+      const indexOfServiceToBeDeleted = this.services.findIndex(
+        service => service.id === id
+      );
+
+      const [deletedService] = this.services.splice(
+        indexOfServiceToBeDeleted,
+        1
+      );
+
+      resolve({
+        status: 200,
+        data: deletedService.id,
+      });
+    });
+  }
 }

@@ -16,4 +16,9 @@ routes.post(
   async (req, res) => await apiServiceController.create(req, res)
 );
 
+routes.delete(
+  '/delete/:id',
+  async (req, res) => await apiServiceController.delete(req, res)
+);
+
 export default routes;
