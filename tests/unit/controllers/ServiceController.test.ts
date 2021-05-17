@@ -1,10 +1,12 @@
 import ServiceController from 'adapters/controllers/ServiceController';
 import {
   mockCreateServiceDTO,
+  mockDeleteServiceDTO,
   mockService,
   mockServiceRepository,
 } from '../../utils/servicesMocks';
 
+// mocking this before test run
 const servicesToBeReturned = [mockService(), mockService()];
 
 const mockListServicesExecute = jest
@@ -39,9 +41,27 @@ jest.mock('domain/services/ServiceServices/CreateService', () => {
   }));
 });
 
+const serviceDeletedMock = mockService();
+const errorDeleteServiceMock = {
+  message: 'Serviço não encontrado',
+};
+const mockDeleteServiceExecute = jest
+  .fn()
+  .mockResolvedValueOnce({ status: 200, result: serviceDeletedMock.id })
+  .mockResolvedValueOnce({ status: 404, error: errorDeleteServiceMock })
+  .mockImplementationOnce(() => {
+    throw new Error('Erro mockado');
+  });
+
+jest.mock('domain/services/ServiceServices/DeleteService', () => {
+  return jest.fn().mockImplementation(() => ({
+    execute: mockDeleteServiceExecute,
+  }));
+});
+
 describe('ServiceController tests', () => {
   describe('listServices method', () => {
-    it('should return correctly (without exception occuring)', async () => {
+    it('should return correctly (list successfully)', async () => {
       const serviceRepositoryMock = mockServiceRepository();
 
       const serviceController = new ServiceController(serviceRepositoryMock);
@@ -125,6 +145,58 @@ describe('ServiceController tests', () => {
         result: {
           message:
             'Erro inesperado ao executar a criação de um serviço: Erro mockado',
+        },
+      });
+    });
+  });
+
+  describe('deleteService method', () => {
+    it('should return correctly (successfully deleted)', async () => {
+      const serviceRepositoryMock = mockServiceRepository();
+      const serviceController = new ServiceController(serviceRepositoryMock);
+
+      const response = await serviceController.deleteService({
+        id: serviceDeletedMock.id,
+      });
+
+      expect(response).toEqual({
+        status: 200,
+        result: {
+          message: 'Serviço excluído com sucesso',
+          data: serviceDeletedMock.id,
+        },
+      });
+    });
+
+    it('should return correctly (service not found)', async () => {
+      const serviceRepositoryMock = mockServiceRepository();
+      const serviceController = new ServiceController(serviceRepositoryMock);
+
+      const response = await serviceController.deleteService(
+        mockDeleteServiceDTO()
+      );
+
+      expect(response).toEqual({
+        status: 404,
+        result: {
+          message: errorDeleteServiceMock.message,
+          data: null,
+        },
+      });
+    });
+
+    it('should return correctly if an exceptions occurs', async () => {
+      const serviceRepositoryMock = mockServiceRepository();
+      const serviceController = new ServiceController(serviceRepositoryMock);
+
+      const response = await serviceController.deleteService(
+        mockDeleteServiceDTO()
+      );
+
+      expect(response).toEqual({
+        status: 500,
+        result: {
+          message: 'Erro inesperado ao excluir serviço: Erro mockado',
         },
       });
     });

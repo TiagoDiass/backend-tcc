@@ -1,6 +1,9 @@
 import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import { IRequestCreateServiceDTO } from 'domain/services/dto';
+import {
+  IRequestCreateServiceDTO,
+  IRequestDeleteServiceDTO,
+} from 'domain/services/dto';
 import faker from 'faker';
 
 export const mockServiceRepository = (): IServiceRepository => ({
@@ -19,4 +22,8 @@ export const mockService = (): Service =>
 export const mockCreateServiceDTO = (): IRequestCreateServiceDTO => ({
   title: faker.random.words(2),
   description: faker.random.words(7),
+});
+
+export const mockDeleteServiceDTO = (): IRequestDeleteServiceDTO => ({
+  id: faker.datatype.uuid(),
 });
