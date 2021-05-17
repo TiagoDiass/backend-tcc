@@ -6,6 +6,13 @@ import {
   mockServiceRepository,
 } from '../../utils/servicesMocks';
 
+const makeSut = () => {
+  const serviceRepositoryMock = mockServiceRepository();
+  const serviceController = new ServiceController(serviceRepositoryMock);
+
+  return { serviceController };
+};
+
 // mocking this before test run
 const servicesToBeReturned = [mockService(), mockService()];
 
@@ -62,9 +69,7 @@ jest.mock('domain/services/ServiceServices/DeleteService', () => {
 describe('ServiceController tests', () => {
   describe('listServices method', () => {
     it('should return correctly (list successfully)', async () => {
-      const serviceRepositoryMock = mockServiceRepository();
-
-      const serviceController = new ServiceController(serviceRepositoryMock);
+      const { serviceController } = makeSut();
 
       const response = await serviceController.listServices();
 
@@ -78,9 +83,7 @@ describe('ServiceController tests', () => {
     });
 
     it('should return correctly if an exception occurs', async () => {
-      const serviceRepositoryMock = mockServiceRepository();
-
-      const serviceController = new ServiceController(serviceRepositoryMock);
+      const { serviceController } = makeSut();
 
       const response = await serviceController.listServices();
 
@@ -95,9 +98,7 @@ describe('ServiceController tests', () => {
 
   describe('createService method', () => {
     it('should return correctly (created successfully)', async () => {
-      const serviceRepositoryMock = mockServiceRepository();
-
-      const serviceController = new ServiceController(serviceRepositoryMock);
+      const { serviceController } = makeSut();
 
       const response = await serviceController.createService(
         mockCreateServiceDTO()
@@ -113,9 +114,7 @@ describe('ServiceController tests', () => {
     });
 
     it('should return correctly (not created, invalid fields)', async () => {
-      const serviceRepositoryMock = mockServiceRepository();
-
-      const serviceController = new ServiceController(serviceRepositoryMock);
+      const { serviceController } = makeSut();
 
       const response = await serviceController.createService(
         mockCreateServiceDTO()
@@ -132,9 +131,7 @@ describe('ServiceController tests', () => {
     });
 
     it('should return correctly if an exception occurs', async () => {
-      const serviceRepositoryMock = mockServiceRepository();
-
-      const serviceController = new ServiceController(serviceRepositoryMock);
+      const { serviceController } = makeSut();
 
       const response = await serviceController.createService(
         mockCreateServiceDTO()
@@ -152,8 +149,7 @@ describe('ServiceController tests', () => {
 
   describe('deleteService method', () => {
     it('should return correctly (successfully deleted)', async () => {
-      const serviceRepositoryMock = mockServiceRepository();
-      const serviceController = new ServiceController(serviceRepositoryMock);
+      const { serviceController } = makeSut();
 
       const response = await serviceController.deleteService({
         id: serviceDeletedMock.id,
@@ -169,8 +165,7 @@ describe('ServiceController tests', () => {
     });
 
     it('should return correctly (service not found)', async () => {
-      const serviceRepositoryMock = mockServiceRepository();
-      const serviceController = new ServiceController(serviceRepositoryMock);
+      const { serviceController } = makeSut();
 
       const response = await serviceController.deleteService(
         mockDeleteServiceDTO()
@@ -186,8 +181,7 @@ describe('ServiceController tests', () => {
     });
 
     it('should return correctly if an exceptions occurs', async () => {
-      const serviceRepositoryMock = mockServiceRepository();
-      const serviceController = new ServiceController(serviceRepositoryMock);
+      const { serviceController } = makeSut();
 
       const response = await serviceController.deleteService(
         mockDeleteServiceDTO()
