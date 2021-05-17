@@ -106,6 +106,7 @@ describe('ServiceController tests', () => {
         result: {
           message: errorCreateServiceMock.message,
           errors: errorCreateServiceMock.errorsList,
+          data: null,
         },
       });
     });

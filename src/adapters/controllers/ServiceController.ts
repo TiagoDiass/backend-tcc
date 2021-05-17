@@ -69,12 +69,12 @@ export default class ServiceController {
             createServiceResponse.status === 201
               ? 'Serviço criado com sucesso'
               : createServiceResponse.error?.message,
+
+          data: createServiceResponse.result || null,
         },
       };
 
-      if (createServiceResponse.status === 201) {
-        response.result.data = createServiceResponse.result;
-      } else {
+      if (createServiceResponse.status !== 201) {
         response.result.errors = createServiceResponse.error?.errorsList;
       }
 
