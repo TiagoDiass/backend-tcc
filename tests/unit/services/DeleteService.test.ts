@@ -1,13 +1,15 @@
 import { IRequestDeleteServiceDTO } from 'domain/services/dto';
 import { DeleteService } from 'domain/services/ServiceServices';
-import { mockService, mockServiceRepository } from '../../utils/servicesMocks';
+import {
+  mockDeleteServiceDTO,
+  mockService,
+  mockServiceRepository,
+} from '../../utils/servicesMocks';
 import faker from 'faker';
 
 describe('DeleteService service', () => {
   it('should return correctly if deleted Service successfully', async () => {
-    const deleteServiceDTO: IRequestDeleteServiceDTO = {
-      id: faker.datatype.uuid(),
-    };
+    const deleteServiceDTO = mockDeleteServiceDTO();
 
     const serviceRepositoryMock = {
       ...mockServiceRepository(),
@@ -37,9 +39,7 @@ describe('DeleteService service', () => {
 
     const deleteService = new DeleteService(serviceRepositoryMock);
 
-    const deleteServiceDTO: IRequestDeleteServiceDTO = {
-      id: faker.datatype.uuid(),
-    };
+    const deleteServiceDTO = mockDeleteServiceDTO();
 
     const response = await deleteService.execute(deleteServiceDTO);
 
@@ -65,7 +65,7 @@ describe('DeleteService service', () => {
 
     const deleteService = new DeleteService(serviceRepositoryMock);
 
-    const response = await deleteService.execute({ id: faker.datatype.uuid() });
+    const response = await deleteService.execute(mockDeleteServiceDTO());
 
     expect(response).toEqual({
       status: 500,
