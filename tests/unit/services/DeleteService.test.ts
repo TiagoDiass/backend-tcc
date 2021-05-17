@@ -1,11 +1,9 @@
-import { IRequestDeleteServiceDTO } from 'domain/services/dto';
 import { DeleteService } from 'domain/services/ServiceServices';
 import {
   mockDeleteServiceDTO,
   mockService,
   mockServiceRepository,
 } from '../../utils/servicesMocks';
-import faker from 'faker';
 
 describe('DeleteService service', () => {
   it('should return correctly if deleted Service successfully', async () => {
