@@ -3,6 +3,7 @@ import IServiceRepository from 'domain/ports/ServiceRepository';
 import {
   IRequestCreateServiceDTO,
   IRequestDeleteServiceDTO,
+  IRequestGetServiceByIdDTO,
 } from 'domain/services/dto';
 import faker from 'faker';
 
@@ -25,5 +26,9 @@ export const mockCreateServiceDTO = (): IRequestCreateServiceDTO => ({
 });
 
 export const mockDeleteServiceDTO = (): IRequestDeleteServiceDTO => ({
+  id: faker.datatype.uuid(),
+});
+
+export const mockGetServiceByIdDTO = (): IRequestGetServiceByIdDTO => ({
   id: faker.datatype.uuid(),
 });

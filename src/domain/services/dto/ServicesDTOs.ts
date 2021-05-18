@@ -6,3 +6,7 @@ export type IRequestCreateServiceDTO = {
 export type IRequestDeleteServiceDTO = {
   id: string;
 };
+
+export type IRequestGetServiceByIdDTO = {
+  id: string;
+};
