@@ -2,6 +2,7 @@ import ServiceController from 'adapters/controllers/ServiceController';
 import {
   mockCreateServiceDTO,
   mockDeleteServiceDTO,
+  mockGetServiceByIdDTO,
   mockService,
   mockServiceRepository,
 } from '../../utils/servicesMocks';
@@ -63,6 +64,24 @@ const mockDeleteServiceExecute = jest
 jest.mock('domain/services/ServiceServices/DeleteService', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockDeleteServiceExecute,
+  }));
+});
+
+const serviceFoundMock = mockService();
+const errorGetServiceByIdMock = {
+  message: 'Serviço não encontrado',
+};
+const mockGetServiceByIdExecute = jest
+  .fn()
+  .mockResolvedValueOnce({ status: 200, result: serviceFoundMock })
+  .mockResolvedValueOnce({ status: 404, error: errorGetServiceByIdMock })
+  .mockImplementationOnce(() => {
+    throw new Error('Erro mockado');
+  });
+
+jest.mock('domain/services/ServiceServices/GetServiceById', () => {
+  return jest.fn().mockImplementation(() => ({
+    execute: mockGetServiceByIdExecute,
   }));
 });
 
@@ -191,6 +210,55 @@ describe('ServiceController tests', () => {
         status: 500,
         result: {
           message: 'Erro inesperado ao excluir serviço: Erro mockado',
+        },
+      });
+    });
+  });
+
+  describe('getServiceById method', () => {
+    it('should return correctly (service successfully found)', async () => {
+      const { serviceController } = makeSut();
+
+      const response = await serviceController.getServiceById(
+        mockGetServiceByIdDTO()
+      );
+
+      expect(response).toEqual({
+        status: 200,
+        result: {
+          message: 'Serviço obtido com sucesso',
+          data: serviceFoundMock,
+        },
+      });
+    });
+
+    it('should return correctly (service not found)', async () => {
+      const { serviceController } = makeSut();
+
+      const response = await serviceController.getServiceById(
+        mockGetServiceByIdDTO()
+      );
+
+      expect(response).toEqual({
+        status: 404,
+        result: {
+          message: errorGetServiceByIdMock.message,
+          data: null,
+        },
+      });
+    });
+
+    it('should return correctly if an exception occurs', async () => {
+      const { serviceController } = makeSut();
+
+      const response = await serviceController.getServiceById(
+        mockGetServiceByIdDTO()
+      );
+
+      expect(response).toEqual({
+        status: 500,
+        result: {
+          message: 'Erro inesperado ao obter serviço: Erro mockado',
         },
       });
     });

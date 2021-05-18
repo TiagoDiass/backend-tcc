@@ -2,10 +2,12 @@ import IServiceRepository from 'domain/ports/ServiceRepository';
 import {
   IRequestCreateServiceDTO,
   IRequestDeleteServiceDTO,
+  IRequestGetServiceByIdDTO,
 } from 'domain/services/dto';
 import {
   CreateService,
   DeleteService,
+  GetServiceById,
   ListServices,
 } from 'domain/services/ServiceServices';
 
@@ -117,6 +119,38 @@ export default class ServiceController {
         status: 500,
         result: {
           message: `Erro inesperado ao excluir serviço: ${
+            error.message || 'Erro sem mensagem...'
+          }`,
+        },
+      };
+    }
+  }
+
+  async getServiceById(
+    getServiceByIdDTO: IRequestGetServiceByIdDTO
+  ): Promise<ControllerMethodResult> {
+    const getServiceById = new GetServiceById(this.serviceRepository);
+
+    try {
+      const getServiceByIdResult = await getServiceById.execute(
+        getServiceByIdDTO
+      );
+
+      return {
+        status: getServiceByIdResult.status,
+        result: {
+          message:
+            getServiceByIdResult.status === 200
+              ? 'Serviço obtido com sucesso'
+              : getServiceByIdResult.error?.message,
+          data: getServiceByIdResult.result || null,
+        },
+      };
+    } catch (error) {
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao obter serviço: ${
             error.message || 'Erro sem mensagem...'
           }`,
         },
