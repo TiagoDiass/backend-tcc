@@ -40,4 +40,16 @@ export default class ApiServiceController {
       res.status(500).json(error.message);
     }
   }
+
+  async getById(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+
+      const response = await this.servicesController.getServiceById({ id });
+
+      res.status(response.status).json(response.result);
+    } catch (error) {
+      res.status(500).json(error.message);
+    }
+  }
 }

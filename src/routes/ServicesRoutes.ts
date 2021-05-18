@@ -21,4 +21,9 @@ routes.delete(
   async (req, res) => await apiServiceController.delete(req, res)
 );
 
+routes.get(
+  '/:id',
+  async (req, res) => await apiServiceController.getById(req, res)
+);
+
 export default routes;
