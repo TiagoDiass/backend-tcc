@@ -52,6 +52,4 @@ describe('GetServiceById Service', () => {
       },
     });
   });
-
-
 });
