@@ -28,4 +28,30 @@ describe('GetServiceById Service', () => {
       result: serviceToBeReturned,
     });
   });
+
+  it('should return correctly if service has not been found', async () => {
+    const getServiceByIdDTO = mockGetServiceByIdDTO();
+
+    const serviceRepositoryMock = {
+      ...mockServiceRepository(),
+      findById: jest.fn().mockResolvedValue({ data: null }),
+    };
+
+    const getServiceById = new GetServiceById(serviceRepositoryMock);
+
+    const response = await getServiceById.execute(getServiceByIdDTO);
+
+    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(
+      getServiceByIdDTO.id
+    );
+
+    expect(response).toEqual({
+      status: 404,
+      error: {
+        message: 'Não há nenhum serviço cadastrado com o ID informado',
+      },
+    });
+  });
+
+
 });
