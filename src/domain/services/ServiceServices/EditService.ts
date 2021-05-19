@@ -22,6 +22,8 @@ export default class EditService {
           },
         };
       }
+
+      const editedService = new Service(editServiceDTO);
     } catch (error) {
       return {
         status: 500,
