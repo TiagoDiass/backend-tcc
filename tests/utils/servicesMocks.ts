@@ -3,6 +3,7 @@ import IServiceRepository from 'domain/ports/ServiceRepository';
 import {
   IRequestCreateServiceDTO,
   IRequestDeleteServiceDTO,
+  IRequestEditServiceDTO,
   IRequestGetServiceByIdDTO,
 } from 'domain/services/dto';
 import faker from 'faker';
@@ -12,6 +13,7 @@ export const mockServiceRepository = (): IServiceRepository => ({
   save: jest.fn(),
   findById: jest.fn(),
   delete: jest.fn(),
+  edit: jest.fn(),
 });
 
 export const mockService = (): Service =>
@@ -31,4 +33,10 @@ export const mockDeleteServiceDTO = (): IRequestDeleteServiceDTO => ({
 
 export const mockGetServiceByIdDTO = (): IRequestGetServiceByIdDTO => ({
   id: faker.datatype.uuid(),
+});
+
+export const mockEditServiceDTO = (): IRequestEditServiceDTO => ({
+  id: faker.datatype.uuid(),
+  title: faker.random.words(2),
+  description: faker.random.words(7),
 });

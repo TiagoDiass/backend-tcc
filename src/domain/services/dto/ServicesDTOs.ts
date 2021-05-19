@@ -10,3 +10,9 @@ export type IRequestDeleteServiceDTO = {
 export type IRequestGetServiceByIdDTO = {
   id: string;
 };
+
+export type IRequestEditServiceDTO = {
+  id: string;
+  title: string;
+  description?: string;
+};
