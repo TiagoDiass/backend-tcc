@@ -39,8 +39,6 @@ describe('GetServiceById Service', () => {
 
     const response = await getServiceById.execute(getServiceByIdDTO);
 
-    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(getServiceByIdDTO.id);
-
     expect(response).toEqual({
       status: 404,
       error: {
@@ -49,5 +47,23 @@ describe('GetServiceById Service', () => {
     });
   });
 
-  // TODO test: should return correctly if ServiceRepository throws an exception
+  it('should return correctly if ServiceRepository throws an exception', async () => {
+    const serviceRepositoryMock = {
+      ...mockServiceRepository(),
+      findById: jest.fn().mockImplementation(() => {
+        throw new Error('Erro mockado');
+      }),
+    };
+
+    const getServiceById = new GetServiceById(serviceRepositoryMock);
+
+    const response = await getServiceById.execute(mockGetServiceByIdDTO());
+
+    expect(response).toEqual({
+      status: 500,
+      error: {
+        message: 'Erro mockado',
+      },
+    });
+  });
 });
