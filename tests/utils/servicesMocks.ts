@@ -35,7 +35,7 @@ export const mockGetServiceByIdDTO = (): IRequestGetServiceByIdDTO => ({
   id: faker.datatype.uuid(),
 });
 
-export const mockEditServiceDTO = (): IRequestUpdateServiceDTO => ({
+export const mockUpdateServiceDTO = (): IRequestUpdateServiceDTO => ({
   id: faker.datatype.uuid(),
   title: faker.random.words(2),
   description: faker.random.words(7),

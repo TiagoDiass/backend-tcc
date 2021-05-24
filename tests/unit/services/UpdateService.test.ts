@@ -2,25 +2,29 @@ import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
 import { IRequestUpdateServiceDTO } from 'domain/services/dto';
 import { UpdateService } from 'domain/services/ServiceServices';
-import { mockEditServiceDTO, mockService, mockServiceRepository } from '../../utils/servicesMocks';
+import {
+  mockUpdateServiceDTO,
+  mockService,
+  mockServiceRepository,
+} from '../../utils/servicesMocks';
 
 describe('EditService service', () => {
   it('should return correctly if service was found and successfully updated', async () => {
-    const editServiceDTO = mockEditServiceDTO();
-    const notEditedService = new Service({ ...mockService(), id: editServiceDTO.id });
-    const updatedService = new Service(editServiceDTO);
+    const updateServiceDTO = mockUpdateServiceDTO();
+    const notUpdatedService = new Service({ ...mockService(), id: updateServiceDTO.id });
+    const updatedService = new Service(updateServiceDTO);
 
     const serviceRepositoryMock: IServiceRepository = {
       ...mockServiceRepository(),
-      findById: jest.fn().mockResolvedValue({ data: notEditedService }),
+      findById: jest.fn().mockResolvedValue({ data: notUpdatedService }),
       update: jest.fn().mockResolvedValue({ data: updatedService }),
     };
 
-    const editService = new UpdateService(serviceRepositoryMock);
+    const updateService = new UpdateService(serviceRepositoryMock);
 
-    const response = await editService.execute(editServiceDTO);
+    const response = await updateService.execute(updateServiceDTO);
 
-    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(editServiceDTO.id);
+    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(updateServiceDTO.id);
     expect(serviceRepositoryMock.update).toHaveBeenCalledWith(updatedService);
 
     expect(response).toEqual({
@@ -30,18 +34,18 @@ describe('EditService service', () => {
   });
 
   it('should return correctly if service has not been found', async () => {
-    const editServiceDTO = mockEditServiceDTO();
+    const updateServiceDTO = mockUpdateServiceDTO();
 
     const serviceRepositoryMock = {
       ...mockServiceRepository(),
       findById: jest.fn().mockResolvedValue({ data: null }),
     };
 
-    const editService = new UpdateService(serviceRepositoryMock);
+    const updateService = new UpdateService(serviceRepositoryMock);
 
-    const response = await editService.execute(editServiceDTO);
+    const response = await updateService.execute(updateServiceDTO);
 
-    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(editServiceDTO.id);
+    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(updateServiceDTO.id);
 
     expect(response).toEqual({
       status: 404,
@@ -53,7 +57,7 @@ describe('EditService service', () => {
 
   it('should return correctly if Service entity throws an exception', async () => {
     const updateServiceDTO: IRequestUpdateServiceDTO = {
-      ...mockEditServiceDTO(),
+      ...mockUpdateServiceDTO(),
       title: '1234', // invalid title
     };
 
@@ -75,5 +79,24 @@ describe('EditService service', () => {
     });
   });
 
-  // TODO test: should return correctly if ServiceRepository throws an exception
+  it('should return correctly if ServiceRepository throws an exception', async () => {
+    const serviceRepositoryMock: IServiceRepository = {
+      ...mockServiceRepository(),
+      findById: jest.fn().mockImplementation(() => {
+        throw new Error('Erro mockado');
+      }),
+    };
+
+    const updateService = new UpdateService(serviceRepositoryMock);
+
+    const response = await updateService.execute(mockUpdateServiceDTO());
+
+    expect(response).toEqual({
+      status: 500,
+      error: {
+        message: 'Erro mockado',
+        errorsList: [],
+      },
+    });
+  });
 });
