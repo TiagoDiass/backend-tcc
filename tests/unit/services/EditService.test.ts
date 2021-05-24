@@ -1,4 +1,6 @@
 import Service from 'domain/entities/Service';
+import IServiceRepository from 'domain/ports/ServiceRepository';
+import { IRequestEditServiceDTO } from 'domain/services/dto';
 import { EditService } from 'domain/services/ServiceServices';
 import { mockEditServiceDTO, mockService, mockServiceRepository } from '../../utils/servicesMocks';
 
@@ -8,7 +10,7 @@ describe('EditService service', () => {
     const notEditedService = new Service({ ...mockService(), id: editServiceDTO.id });
     const updatedService = new Service(editServiceDTO);
 
-    const serviceRepositoryMock = {
+    const serviceRepositoryMock: IServiceRepository = {
       ...mockServiceRepository(),
       findById: jest.fn().mockResolvedValue({ data: notEditedService }),
       update: jest.fn().mockResolvedValue({ data: updatedService }),
@@ -49,6 +51,29 @@ describe('EditService service', () => {
     });
   });
 
-  // TODO test: should return correctly if Service entity throws an exception
+  it('should return correctly if Service entity throws an exception', async () => {
+    const updateServiceDTO: IRequestEditServiceDTO = {
+      ...mockEditServiceDTO(),
+      title: '1234', // invalid title
+    };
+
+    const serviceRepositoryMock: IServiceRepository = {
+      ...mockServiceRepository(),
+      findById: jest.fn().mockResolvedValue({ data: mockService() }),
+    };
+
+    const updateService = new EditService(serviceRepositoryMock);
+
+    const response = await updateService.execute(updateServiceDTO);
+
+    expect(response).toEqual({
+      status: 400,
+      error: {
+        message: 'Serviço inválido',
+        errorsList: ['título do serviço deve conter pelo menos 5 caracteres'],
+      },
+    });
+  });
+
   // TODO test: should return correctly if ServiceRepository throws an exception
 });

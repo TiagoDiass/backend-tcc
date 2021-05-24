@@ -28,10 +28,13 @@ export default class EditService {
         result: repoResult.data,
       };
     } catch (error) {
+      const isInvalidServiceError = error.type === 'invalid-service-error';
+
       return {
-        status: 500,
+        status: isInvalidServiceError ? 400 : 500,
         error: {
           message: error.message,
+          errorsList: isInvalidServiceError ? error.errorsList : [],
         },
       };
     }
