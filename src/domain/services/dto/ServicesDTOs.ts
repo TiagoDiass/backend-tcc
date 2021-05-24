@@ -11,7 +11,7 @@ export type IRequestGetServiceByIdDTO = {
   id: string;
 };
 
-export type IRequestEditServiceDTO = {
+export type IRequestUpdateServiceDTO = {
   id: string;
   title: string;
   description?: string;

@@ -1,7 +1,7 @@
 import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import { IRequestEditServiceDTO } from 'domain/services/dto';
-import { EditService } from 'domain/services/ServiceServices';
+import { IRequestUpdateServiceDTO } from 'domain/services/dto';
+import { UpdateService } from 'domain/services/ServiceServices';
 import { mockEditServiceDTO, mockService, mockServiceRepository } from '../../utils/servicesMocks';
 
 describe('EditService service', () => {
@@ -16,7 +16,7 @@ describe('EditService service', () => {
       update: jest.fn().mockResolvedValue({ data: updatedService }),
     };
 
-    const editService = new EditService(serviceRepositoryMock);
+    const editService = new UpdateService(serviceRepositoryMock);
 
     const response = await editService.execute(editServiceDTO);
 
@@ -37,7 +37,7 @@ describe('EditService service', () => {
       findById: jest.fn().mockResolvedValue({ data: null }),
     };
 
-    const editService = new EditService(serviceRepositoryMock);
+    const editService = new UpdateService(serviceRepositoryMock);
 
     const response = await editService.execute(editServiceDTO);
 
@@ -52,7 +52,7 @@ describe('EditService service', () => {
   });
 
   it('should return correctly if Service entity throws an exception', async () => {
-    const updateServiceDTO: IRequestEditServiceDTO = {
+    const updateServiceDTO: IRequestUpdateServiceDTO = {
       ...mockEditServiceDTO(),
       title: '1234', // invalid title
     };
@@ -62,7 +62,7 @@ describe('EditService service', () => {
       findById: jest.fn().mockResolvedValue({ data: mockService() }),
     };
 
-    const updateService = new EditService(serviceRepositoryMock);
+    const updateService = new UpdateService(serviceRepositoryMock);
 
     const response = await updateService.execute(updateServiceDTO);
 

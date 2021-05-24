@@ -1,14 +1,14 @@
 import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import { IRequestEditServiceDTO } from '../dto';
+import { IRequestUpdateServiceDTO } from '../dto';
 import { DomainServiceResult } from '../types';
 
-export default class EditService {
+export default class UpdateService {
   constructor(private readonly serviceRepository: IServiceRepository) {}
 
-  async execute(editServiceDTO: IRequestEditServiceDTO): Promise<DomainServiceResult<Service>> {
+  async execute(updateServiceDTO: IRequestUpdateServiceDTO): Promise<DomainServiceResult<Service>> {
     try {
-      const { data: serviceExists } = await this.serviceRepository.findById(editServiceDTO.id);
+      const { data: serviceExists } = await this.serviceRepository.findById(updateServiceDTO.id);
 
       if (!serviceExists) {
         return {
@@ -19,7 +19,7 @@ export default class EditService {
         };
       }
 
-      const editedService = new Service(editServiceDTO);
+      const editedService = new Service(updateServiceDTO);
 
       const repoResult = await this.serviceRepository.update(editedService);
 
