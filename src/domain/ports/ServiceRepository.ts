@@ -6,5 +6,5 @@ export default interface IServiceRepository {
   list(): Promise<IRepositoryMethodResult<Service[]>>;
   findById(id: string): Promise<IRepositoryMethodResult<Service | null>>;
   delete(id: string): Promise<IRepositoryMethodResult<Service['id']>>;
-  edit(service: Service): Promise<IRepositoryMethodResult<Service>>;
+  update(service: Service): Promise<IRepositoryMethodResult<Service>>;
 }

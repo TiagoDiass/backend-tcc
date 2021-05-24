@@ -13,7 +13,7 @@ export const mockServiceRepository = (): IServiceRepository => ({
   save: jest.fn(),
   findById: jest.fn(),
   delete: jest.fn(),
-  edit: jest.fn(),
+  update: jest.fn(),
 });
 
 export const mockService = (): Service =>
