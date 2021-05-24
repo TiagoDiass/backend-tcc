@@ -27,6 +27,8 @@ describe('EditService service', () => {
     });
   });
 
+  xit('should return correctly if Service entity throws an exception', async () => {});
+
   it('should return correctly if service has not been found', async () => {
     const editServiceDTO = mockEditServiceDTO();
 

@@ -19,9 +19,7 @@ describe('GetServiceById Service', () => {
 
     const response = await getServiceById.execute(getServiceByIdDTO);
 
-    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(
-      getServiceByIdDTO.id
-    );
+    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(getServiceByIdDTO.id);
 
     expect(response).toEqual({
       status: 200,
@@ -41,9 +39,7 @@ describe('GetServiceById Service', () => {
 
     const response = await getServiceById.execute(getServiceByIdDTO);
 
-    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(
-      getServiceByIdDTO.id
-    );
+    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(getServiceByIdDTO.id);
 
     expect(response).toEqual({
       status: 404,
@@ -52,4 +48,6 @@ describe('GetServiceById Service', () => {
       },
     });
   });
+
+  xit('should return correctly if ServiceRepository throws an exception', async () => {});
 });

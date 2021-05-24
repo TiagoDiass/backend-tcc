@@ -19,9 +19,7 @@ describe('DeleteService service', () => {
 
     const response = await deleteService.execute(deleteServiceDTO);
 
-    expect(serviceRepositoryMock.delete).toHaveBeenCalledWith(
-      deleteServiceDTO.id
-    );
+    expect(serviceRepositoryMock.delete).toHaveBeenCalledWith(deleteServiceDTO.id);
 
     expect(response).toEqual({
       status: 200,
@@ -41,9 +39,7 @@ describe('DeleteService service', () => {
 
     const response = await deleteService.execute(deleteServiceDTO);
 
-    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(
-      deleteServiceDTO.id
-    );
+    expect(serviceRepositoryMock.findById).toHaveBeenCalledWith(deleteServiceDTO.id);
 
     expect(response).toEqual({
       status: 404,
@@ -53,7 +49,7 @@ describe('DeleteService service', () => {
     });
   });
 
-  it('should return correctly if an exception occurs', async () => {
+  it('should return correctly if ServiceRepository throws an exception', async () => {
     const serviceRepositoryMock = {
       ...mockServiceRepository(),
       findById: jest.fn().mockImplementation(() => {
