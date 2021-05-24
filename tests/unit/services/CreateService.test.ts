@@ -63,7 +63,7 @@ describe('CreateService service', () => {
     });
   });
 
-  it('should return correctly if repository throws an exception', async () => {
+  it('should return correctly if ServiceRepository throws an exception', async () => {
     const serviceRepositoryMock = {
       ...mockServiceRepository(),
 
