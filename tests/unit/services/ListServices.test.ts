@@ -24,7 +24,7 @@ describe('ListServices Service', () => {
     });
   });
 
-  it('should return correctly in cases of error', async () => {
+  it('should return correctly if ServiceRepository throws an exception', async () => {
     const serviceRepositoryMock = {
       ...mockServiceRepository(),
 
