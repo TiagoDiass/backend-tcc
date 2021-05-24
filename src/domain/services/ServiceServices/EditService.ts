@@ -6,13 +6,9 @@ import { DomainServiceResult } from '../types';
 export default class EditService {
   constructor(private readonly serviceRepository: IServiceRepository) {}
 
-  async execute(
-    editServiceDTO: IRequestEditServiceDTO
-  ): Promise<DomainServiceResult<Service>> {
+  async execute(editServiceDTO: IRequestEditServiceDTO): Promise<DomainServiceResult<Service>> {
     try {
-      const { data: serviceExists } = await this.serviceRepository.findById(
-        editServiceDTO.id
-      );
+      const { data: serviceExists } = await this.serviceRepository.findById(editServiceDTO.id);
 
       if (!serviceExists) {
         return {
@@ -24,6 +20,13 @@ export default class EditService {
       }
 
       const editedService = new Service(editServiceDTO);
+
+      const repoResult = await this.serviceRepository.update(editedService);
+
+      return {
+        status: 200,
+        result: repoResult.data,
+      };
     } catch (error) {
       return {
         status: 500,
