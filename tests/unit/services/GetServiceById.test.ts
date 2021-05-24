@@ -49,5 +49,5 @@ describe('GetServiceById Service', () => {
     });
   });
 
-  xit('should return correctly if ServiceRepository throws an exception', async () => {});
+  // TODO test: should return correctly if ServiceRepository throws an exception
 });

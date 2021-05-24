@@ -27,8 +27,6 @@ describe('EditService service', () => {
     });
   });
 
-  xit('should return correctly if Service entity throws an exception', async () => {});
-
   it('should return correctly if service has not been found', async () => {
     const editServiceDTO = mockEditServiceDTO();
 
@@ -50,4 +48,7 @@ describe('EditService service', () => {
       },
     });
   });
+
+  // TODO test: should return correctly if Service entity throws an exception
+  // TODO test: should return correctly if ServiceRepository throws an exception
 });
