@@ -8,7 +8,7 @@ import {
   mockServiceRepository,
 } from '../../utils/servicesMocks';
 
-describe('EditService service', () => {
+describe('UpdateService service', () => {
   it('should return correctly if service was found and successfully updated', async () => {
     const updateServiceDTO = mockUpdateServiceDTO();
     const notUpdatedService = new Service({ ...mockService(), id: updateServiceDTO.id });
