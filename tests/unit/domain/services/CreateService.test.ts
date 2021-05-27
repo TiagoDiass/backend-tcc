@@ -1,6 +1,6 @@
 import { CreateService } from 'domain/services/ServiceServices';
 import { IRequestCreateServiceDTO } from 'domain/services/dto';
-import { mockServiceRepository } from '../../utils/servicesMocks';
+import { mockServiceRepository } from '../../../utils/servicesMocks';
 
 const mockedUUID = '1e16f407-1cef-427c-af39-e9c3efcbd18e';
 

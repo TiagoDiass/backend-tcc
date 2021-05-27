@@ -6,7 +6,7 @@ import {
   mockUpdateServiceDTO,
   mockService,
   mockServiceRepository,
-} from '../../utils/servicesMocks';
+} from '../../../utils/servicesMocks';
 
 describe('UpdateService service', () => {
   it('should return correctly if service was found and successfully updated', async () => {

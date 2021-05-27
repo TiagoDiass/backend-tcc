@@ -3,7 +3,7 @@ import {
   mockDeleteServiceDTO,
   mockService,
   mockServiceRepository,
-} from '../../utils/servicesMocks';
+} from '../../../utils/servicesMocks';
 
 describe('DeleteService service', () => {
   it('should return correctly if deleted Service successfully', async () => {

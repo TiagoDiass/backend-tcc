@@ -3,7 +3,7 @@ import {
   mockGetServiceByIdDTO,
   mockService,
   mockServiceRepository,
-} from '../../utils/servicesMocks';
+} from '../../../utils/servicesMocks';
 
 describe('GetServiceById Service', () => {
   it('should return correctly if service has been found', async () => {
