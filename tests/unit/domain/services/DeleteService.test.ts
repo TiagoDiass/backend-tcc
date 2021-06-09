@@ -27,7 +27,7 @@ describe('DeleteService service', () => {
     });
   });
 
-  it('should return correctly if there is no title with the received id', async () => {
+  it('should return correctly if there is no service with the received id', async () => {
     const serviceRepositoryMock = {
       ...mockServiceRepository(),
       findById: jest.fn().mockResolvedValue({ status: 404, data: null }),
