@@ -10,8 +10,8 @@
   - [x] Serviço de domínio CreateService e seus testes;
   - [x] Serviço de domínio DeleteService e seus testes;
   - [x] Serviço de domínio GetServiceById e seus testes;
-  - [ ] Serviço de domínio EditService e seus testes;
-  - [ ] Controller das rotas que utilizam esses serviços de domínio / casos de uso.
+  - [x] Serviço de domínio UpdateService e seus testes;
+  - [x] Controller das rotas que utilizam esses serviços de domínio / casos de uso.
 
 - [ ] Transações:
 
