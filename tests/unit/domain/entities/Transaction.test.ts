@@ -1,8 +1,6 @@
 import Transaction from 'domain/entities/Transaction';
-import InvalidServiceError from 'domain/exceptions/InvalidServiceError';
-import InvalidTransactionError from 'domain/exceptions/InvalidTransactionError';
 
-describe('Transaction entity', () => {
+describe('Entity: Transaction', () => {
   it('should instantiate a new Transaction correctly without passing an id', () => {
     const transaction = new Transaction({
       title: 'Compras de alguns medicamentos',
@@ -54,9 +52,7 @@ describe('Transaction entity', () => {
     }
 
     expect(error.type).toBe('invalid-transaction-error');
-    expect(error.errorsList).toEqual([
-      'ID da transação deve estar no padrão UUID V4',
-    ]);
+    expect(error.errorsList).toEqual(['ID da transação deve estar no padrão UUID V4']);
   });
 
   it('should throw an InvalidTransactionError if title has less than 5 characters', () => {
@@ -74,9 +70,7 @@ describe('Transaction entity', () => {
     }
 
     expect(error.type).toBe('invalid-transaction-error');
-    expect(error.errorsList).toEqual([
-      'título da transação deve conter pelo menos 5 caracteres',
-    ]);
+    expect(error.errorsList).toEqual(['título da transação deve conter pelo menos 5 caracteres']);
   });
 
   it('should throw an InvalidTransactionError if value is not greater than 0', () => {
@@ -94,9 +88,7 @@ describe('Transaction entity', () => {
     }
 
     expect(error.type).toBe('invalid-transaction-error');
-    expect(error.errorsList).toEqual([
-      'valor da transação deve ser maior que zero',
-    ]);
+    expect(error.errorsList).toEqual(['valor da transação deve ser maior que zero']);
   });
 
   it('should throw an InvalidTransactionError if date is not in the correct format(YYYY-MM-DD)', () => {
@@ -114,8 +106,6 @@ describe('Transaction entity', () => {
     }
 
     expect(error.type).toBe('invalid-transaction-error');
-    expect(error.errorsList).toEqual([
-      'data da transação deve estar no formato yyyy-mm-dd',
-    ]);
+    expect(error.errorsList).toEqual(['data da transação deve estar no formato yyyy-mm-dd']);
   });
 });
