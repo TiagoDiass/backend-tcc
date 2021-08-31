@@ -3,12 +3,14 @@ import {
   IRequestCreateServiceDTO,
   IRequestDeleteServiceDTO,
   IRequestGetServiceByIdDTO,
+  IRequestUpdateServiceDTO,
 } from 'domain/services/dto';
 import {
   CreateService,
   DeleteService,
   GetServiceById,
   ListServices,
+  UpdateService,
 } from 'domain/services/ServiceServices';
 
 type ControllerMethodResult = {
@@ -36,33 +38,24 @@ export default class ServiceController {
             listServicesResponse.status === 200
               ? 'Lista de serviços obtida com sucesso'
               : listServicesResponse.error?.message,
-          data:
-            listServicesResponse.status === 200
-              ? listServicesResponse.result
-              : [],
+          data: listServicesResponse.status === 200 ? listServicesResponse.result : [],
         },
       };
     } catch (error) {
       return {
         status: 500,
         result: {
-          message: `Erro inesperado ao listar serviços: ${
-            error.message || 'Erro sem mensagem...'
-          }`,
+          message: `Erro inesperado ao listar serviços: ${error.message || 'Erro sem mensagem...'}`,
         },
       };
     }
   }
 
-  async createService(
-    createServiceDTO: IRequestCreateServiceDTO
-  ): Promise<ControllerMethodResult> {
+  async createService(createServiceDTO: IRequestCreateServiceDTO): Promise<ControllerMethodResult> {
     const createServiceService = new CreateService(this.serviceRepository);
 
     try {
-      const createServiceResponse = await createServiceService.execute(
-        createServiceDTO
-      );
+      const createServiceResponse = await createServiceService.execute(createServiceDTO);
 
       const response: ControllerMethodResult = {
         status: createServiceResponse.status,
@@ -93,15 +86,11 @@ export default class ServiceController {
     }
   }
 
-  async deleteService(
-    deleteServiceDTO: IRequestDeleteServiceDTO
-  ): Promise<ControllerMethodResult> {
+  async deleteService(deleteServiceDTO: IRequestDeleteServiceDTO): Promise<ControllerMethodResult> {
     const deleteServiceService = new DeleteService(this.serviceRepository);
 
     try {
-      const deleteServiceResult = await deleteServiceService.execute(
-        deleteServiceDTO
-      );
+      const deleteServiceResult = await deleteServiceService.execute(deleteServiceDTO);
 
       return {
         status: deleteServiceResult.status,
@@ -118,9 +107,7 @@ export default class ServiceController {
       return {
         status: 500,
         result: {
-          message: `Erro inesperado ao excluir serviço: ${
-            error.message || 'Erro sem mensagem...'
-          }`,
+          message: `Erro inesperado ao excluir serviço: ${error.message || 'Erro sem mensagem...'}`,
         },
       };
     }
@@ -132,9 +119,7 @@ export default class ServiceController {
     const getServiceById = new GetServiceById(this.serviceRepository);
 
     try {
-      const getServiceByIdResult = await getServiceById.execute(
-        getServiceByIdDTO
-      );
+      const getServiceByIdResult = await getServiceById.execute(getServiceByIdDTO);
 
       return {
         status: getServiceByIdResult.status,
@@ -150,7 +135,40 @@ export default class ServiceController {
       return {
         status: 500,
         result: {
-          message: `Erro inesperado ao obter serviço: ${
+          message: `Erro inesperado ao obter serviço: ${error.message || 'Erro sem mensagem...'}`,
+        },
+      };
+    }
+  }
+
+  async updateService(updateServiceDTO: IRequestUpdateServiceDTO): Promise<ControllerMethodResult> {
+    const updateServiceService = new UpdateService(this.serviceRepository);
+
+    try {
+      const updateServiceResponse = await updateServiceService.execute(updateServiceDTO);
+
+      const response: ControllerMethodResult = {
+        status: updateServiceResponse.status,
+        result: {
+          message:
+            updateServiceResponse.status === 200
+              ? 'Serviço atualizado com sucesso'
+              : updateServiceResponse.error?.message,
+
+          data: updateServiceResponse.result || null,
+        },
+      };
+
+      if (![200, 404].includes(updateServiceResponse.status)) {
+        response.result.errors = updateServiceResponse.error?.errorsList;
+      }
+
+      return response;
+    } catch (error) {
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao executar a atualização de um serviço: ${
             error.message || 'Erro sem mensagem...'
           }`,
         },

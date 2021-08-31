@@ -11,7 +11,7 @@ export default class MemoryServiceRepository implements IServiceRepository {
   save(service: Service): Promise<IRepositoryMethodResult<Service>> {
     this.services.push(service);
 
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       resolve({
         status: 200,
         data: this.services[this.services.length - 1],
@@ -41,18 +41,26 @@ export default class MemoryServiceRepository implements IServiceRepository {
 
   delete(id: string): Promise<IRepositoryMethodResult<string>> {
     return new Promise(resolve => {
-      const indexOfServiceToBeDeleted = this.services.findIndex(
-        service => service.id === id
-      );
+      const indexOfServiceToBeDeleted = this.services.findIndex(service => service.id === id);
 
-      const [deletedService] = this.services.splice(
-        indexOfServiceToBeDeleted,
-        1
-      );
+      const [deletedService] = this.services.splice(indexOfServiceToBeDeleted, 1);
 
       resolve({
         status: 200,
         data: deletedService.id,
+      });
+    });
+  }
+
+  update(service: Service): Promise<IRepositoryMethodResult<Service>> {
+    const serviceIndex = this.services.findIndex(s => s.id === service.id);
+
+    this.services[serviceIndex] = service;
+
+    return new Promise(resolve => {
+      resolve({
+        status: 200,
+        data: this.services[serviceIndex],
       });
     });
   }

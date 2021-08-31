@@ -5,6 +5,7 @@ import {
   mockGetServiceByIdDTO,
   mockService,
   mockServiceRepository,
+  mockUpdateServiceDTO,
 } from '../../utils/servicesMocks';
 
 const makeSut = () => {
@@ -14,7 +15,9 @@ const makeSut = () => {
   return { serviceController };
 };
 
-// mocking this before test run
+// MOCKS before tests run
+
+// ListServices mock
 const servicesToBeReturned = [mockService(), mockService()];
 
 const mockListServicesExecute = jest
@@ -30,14 +33,15 @@ jest.mock('domain/services/ServiceServices/ListServices', () => {
   }));
 });
 
-const serviceCreatedMock = mockService();
+// CreateService mock
+const createdServiceMock = mockService();
 const errorCreateServiceMock = {
   message: 'Erro ao criar serviço',
   errorsList: ['campo inválido 1', 'campo inválido 2'],
 };
 const mockCreateServiceExecute = jest
   .fn()
-  .mockResolvedValueOnce({ status: 201, result: serviceCreatedMock })
+  .mockResolvedValueOnce({ status: 201, result: createdServiceMock })
   .mockResolvedValueOnce({ status: 400, error: errorCreateServiceMock })
   .mockImplementationOnce(() => {
     throw new Error('Erro mockado');
@@ -49,13 +53,14 @@ jest.mock('domain/services/ServiceServices/CreateService', () => {
   }));
 });
 
-const serviceDeletedMock = mockService();
+// DeleteService mock
+const deletedServiceMock = mockService();
 const errorDeleteServiceMock = {
   message: 'Serviço não encontrado',
 };
 const mockDeleteServiceExecute = jest
   .fn()
-  .mockResolvedValueOnce({ status: 200, result: serviceDeletedMock.id })
+  .mockResolvedValueOnce({ status: 200, result: deletedServiceMock.id })
   .mockResolvedValueOnce({ status: 404, error: errorDeleteServiceMock })
   .mockImplementationOnce(() => {
     throw new Error('Erro mockado');
@@ -67,13 +72,14 @@ jest.mock('domain/services/ServiceServices/DeleteService', () => {
   }));
 });
 
-const serviceFoundMock = mockService();
+// GetServiceById mock
+const foundServiceMock = mockService();
 const errorGetServiceByIdMock = {
   message: 'Serviço não encontrado',
 };
 const mockGetServiceByIdExecute = jest
   .fn()
-  .mockResolvedValueOnce({ status: 200, result: serviceFoundMock })
+  .mockResolvedValueOnce({ status: 200, result: foundServiceMock })
   .mockResolvedValueOnce({ status: 404, error: errorGetServiceByIdMock })
   .mockImplementationOnce(() => {
     throw new Error('Erro mockado');
@@ -82,6 +88,26 @@ const mockGetServiceByIdExecute = jest
 jest.mock('domain/services/ServiceServices/GetServiceById', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockGetServiceByIdExecute,
+  }));
+});
+
+// UpdateService mock
+const updatedServiceMock = mockService();
+const errorUpdateServiceMock = {
+  message: 'Erro ao atualizar serviço',
+  errorsList: ['campo inválido 1', 'campo inválido 2'],
+};
+const mockUpdateServiceExecute = jest
+  .fn()
+  .mockResolvedValueOnce({ status: 200, result: updatedServiceMock })
+  .mockResolvedValueOnce({ status: 400, error: errorUpdateServiceMock })
+  .mockImplementationOnce(() => {
+    throw new Error('Erro mockado');
+  });
+
+jest.mock('domain/services/ServiceServices/UpdateService', () => {
+  return jest.fn().mockImplementation(() => ({
+    execute: mockUpdateServiceExecute,
   }));
 });
 
@@ -119,15 +145,13 @@ describe('ServiceController tests', () => {
     it('should return correctly (created successfully)', async () => {
       const { serviceController } = makeSut();
 
-      const response = await serviceController.createService(
-        mockCreateServiceDTO()
-      );
+      const response = await serviceController.createService(mockCreateServiceDTO());
 
       expect(response).toEqual({
         status: 201,
         result: {
           message: 'Serviço criado com sucesso',
-          data: serviceCreatedMock,
+          data: createdServiceMock,
         },
       });
     });
@@ -135,9 +159,7 @@ describe('ServiceController tests', () => {
     it('should return correctly (not created, invalid fields)', async () => {
       const { serviceController } = makeSut();
 
-      const response = await serviceController.createService(
-        mockCreateServiceDTO()
-      );
+      const response = await serviceController.createService(mockCreateServiceDTO());
 
       expect(response).toEqual({
         status: 400,
@@ -152,15 +174,12 @@ describe('ServiceController tests', () => {
     it('should return correctly if an exception occurs', async () => {
       const { serviceController } = makeSut();
 
-      const response = await serviceController.createService(
-        mockCreateServiceDTO()
-      );
+      const response = await serviceController.createService(mockCreateServiceDTO());
 
       expect(response).toEqual({
         status: 500,
         result: {
-          message:
-            'Erro inesperado ao executar a criação de um serviço: Erro mockado',
+          message: 'Erro inesperado ao executar a criação de um serviço: Erro mockado',
         },
       });
     });
@@ -171,14 +190,14 @@ describe('ServiceController tests', () => {
       const { serviceController } = makeSut();
 
       const response = await serviceController.deleteService({
-        id: serviceDeletedMock.id,
+        id: deletedServiceMock.id,
       });
 
       expect(response).toEqual({
         status: 200,
         result: {
           message: 'Serviço excluído com sucesso',
-          data: serviceDeletedMock.id,
+          data: deletedServiceMock.id,
         },
       });
     });
@@ -186,9 +205,7 @@ describe('ServiceController tests', () => {
     it('should return correctly (service not found)', async () => {
       const { serviceController } = makeSut();
 
-      const response = await serviceController.deleteService(
-        mockDeleteServiceDTO()
-      );
+      const response = await serviceController.deleteService(mockDeleteServiceDTO());
 
       expect(response).toEqual({
         status: 404,
@@ -202,9 +219,7 @@ describe('ServiceController tests', () => {
     it('should return correctly if an exceptions occurs', async () => {
       const { serviceController } = makeSut();
 
-      const response = await serviceController.deleteService(
-        mockDeleteServiceDTO()
-      );
+      const response = await serviceController.deleteService(mockDeleteServiceDTO());
 
       expect(response).toEqual({
         status: 500,
@@ -219,15 +234,13 @@ describe('ServiceController tests', () => {
     it('should return correctly (service successfully found)', async () => {
       const { serviceController } = makeSut();
 
-      const response = await serviceController.getServiceById(
-        mockGetServiceByIdDTO()
-      );
+      const response = await serviceController.getServiceById(mockGetServiceByIdDTO());
 
       expect(response).toEqual({
         status: 200,
         result: {
           message: 'Serviço obtido com sucesso',
-          data: serviceFoundMock,
+          data: foundServiceMock,
         },
       });
     });
@@ -235,9 +248,7 @@ describe('ServiceController tests', () => {
     it('should return correctly (service not found)', async () => {
       const { serviceController } = makeSut();
 
-      const response = await serviceController.getServiceById(
-        mockGetServiceByIdDTO()
-      );
+      const response = await serviceController.getServiceById(mockGetServiceByIdDTO());
 
       expect(response).toEqual({
         status: 404,
@@ -251,14 +262,56 @@ describe('ServiceController tests', () => {
     it('should return correctly if an exception occurs', async () => {
       const { serviceController } = makeSut();
 
-      const response = await serviceController.getServiceById(
-        mockGetServiceByIdDTO()
-      );
+      const response = await serviceController.getServiceById(mockGetServiceByIdDTO());
 
       expect(response).toEqual({
         status: 500,
         result: {
           message: 'Erro inesperado ao obter serviço: Erro mockado',
+        },
+      });
+    });
+  });
+
+  describe('updateService method', () => {
+    it('should return correctly (updated succesfully)', async () => {
+      const { serviceController } = makeSut();
+
+      const response = await serviceController.updateService(mockUpdateServiceDTO());
+
+      expect(response).toEqual({
+        status: 200,
+        result: {
+          message: 'Serviço atualizado com sucesso',
+          data: updatedServiceMock,
+        },
+      });
+    });
+
+    it('should return correctly (not updated, invalid fields)', async () => {
+      const { serviceController } = makeSut();
+
+      const response = await serviceController.updateService(mockUpdateServiceDTO());
+
+      expect(response).toEqual({
+        status: 400,
+        result: {
+          message: errorUpdateServiceMock.message,
+          data: null,
+          errors: errorUpdateServiceMock.errorsList,
+        },
+      });
+    });
+
+    it('should return correctly if an exception occurs', async () => {
+      const { serviceController } = makeSut();
+
+      const response = await serviceController.updateService(mockUpdateServiceDTO());
+
+      expect(response).toEqual({
+        status: 500,
+        result: {
+          message: 'Erro inesperado ao executar a atualização de um serviço: Erro mockado',
         },
       });
     });
