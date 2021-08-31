@@ -1,6 +1,6 @@
 import Service from 'domain/entities/Service';
 
-describe('Service entity', () => {
+describe('Entity: Service', () => {
   it('should instantiate a new Service correctly', () => {
     const service = new Service({
       title: 'Título do serviço',
@@ -47,9 +47,7 @@ describe('Service entity', () => {
     }
 
     expect(error.type).toBe('invalid-service-error');
-    expect(error.errorsList).toEqual([
-      'ID do serviço deve estar no padrão UUID',
-    ]);
+    expect(error.errorsList).toEqual(['ID do serviço deve estar no padrão UUID']);
   });
 
   it('should throw an InvalidServiceError if title has less than 5 characters', () => {
@@ -65,9 +63,7 @@ describe('Service entity', () => {
     }
 
     expect(error.type).toBe('invalid-service-error');
-    expect(error.errorsList).toEqual([
-      'título do serviço deve conter pelo menos 5 caracteres',
-    ]);
+    expect(error.errorsList).toEqual(['título do serviço deve conter pelo menos 5 caracteres']);
   });
 
   it('should throw an InvalidServiceError if description has more than 150 characters', () => {
