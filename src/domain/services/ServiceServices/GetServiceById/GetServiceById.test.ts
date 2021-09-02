@@ -1,9 +1,9 @@
-import GetServiceById from 'domain/services/ServiceServices/GetServiceById';
+import GetServiceById from 'domain/services/ServiceServices/GetServiceById/GetServiceById';
 import {
   mockGetServiceByIdDTO,
   mockService,
   mockServiceRepository,
-} from '../../../utils/servicesMocks';
+} from '@testUtils/servicesMocks';
 
 describe('GetServiceById Service', () => {
   it('should return correctly if service has been found', async () => {

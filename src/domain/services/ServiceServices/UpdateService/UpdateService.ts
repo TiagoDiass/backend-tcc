@@ -1,7 +1,7 @@
 import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import { IRequestUpdateServiceDTO } from '../dto';
-import { DomainServiceResult } from '../types';
+import { IRequestUpdateServiceDTO } from 'domain/services/dto';
+import { DomainServiceResult } from 'domain/services/types';
 
 export default class UpdateService {
   constructor(private readonly serviceRepository: IServiceRepository) {}

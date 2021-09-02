@@ -1,5 +1,5 @@
 import { ListServices } from 'domain/services/ServiceServices';
-import { mockService, mockServiceRepository } from '../../../utils/servicesMocks';
+import { mockService, mockServiceRepository } from '@testUtils/servicesMocks';
 
 describe('ListServices Service', () => {
   it('should call serviceRepository.list() and return correctly', async () => {

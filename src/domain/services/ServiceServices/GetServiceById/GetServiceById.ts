@@ -1,7 +1,7 @@
 import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import { IRequestGetServiceByIdDTO } from '../dto';
-import { DomainServiceResult } from '../types';
+import { IRequestGetServiceByIdDTO } from 'domain/services/dto';
+import { DomainServiceResult } from 'domain/services/types';
 
 export default class GetServiceById {
   constructor(private readonly serviceRepository: IServiceRepository) {}
@@ -10,9 +10,7 @@ export default class GetServiceById {
     getServiceByIdDTO: IRequestGetServiceByIdDTO
   ): Promise<DomainServiceResult<Service>> {
     try {
-      const { data: service } = await this.serviceRepository.findById(
-        getServiceByIdDTO.id
-      );
+      const { data: service } = await this.serviceRepository.findById(getServiceByIdDTO.id);
 
       if (!service) {
         return {

@@ -2,11 +2,7 @@ import Service from 'domain/entities/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
 import { IRequestUpdateServiceDTO } from 'domain/services/dto';
 import { UpdateService } from 'domain/services/ServiceServices';
-import {
-  mockUpdateServiceDTO,
-  mockService,
-  mockServiceRepository,
-} from '../../../utils/servicesMocks';
+import { mockUpdateServiceDTO, mockService, mockServiceRepository } from '@testUtils/servicesMocks';
 
 describe('UpdateService service', () => {
   it('should return correctly if service was found and successfully updated', async () => {
