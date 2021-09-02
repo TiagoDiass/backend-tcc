@@ -1,5 +1,5 @@
-import InvalidServiceError from 'domain/exceptions/InvalidServiceError';
-import InvalidTransactionError from 'domain/exceptions/InvalidTransactionError';
+import InvalidServiceError from './InvalidServiceError';
+import InvalidTransactionError from './InvalidTransactionError';
 
 describe('Exceptions test', () => {
   it('InvalidTransactionError: it should have the correct message and type', () => {
