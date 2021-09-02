@@ -1,4 +1,4 @@
-import Transaction from 'domain/entities/Transaction';
+import Transaction from './Transaction';
 
 describe('Entity: Transaction', () => {
   it('should instantiate a new Transaction correctly without passing an id', () => {

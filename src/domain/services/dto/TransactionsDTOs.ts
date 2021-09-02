@@ -1,4 +1,4 @@
-import { ITransactionProperties } from 'domain/entities/Transaction';
+import { ITransactionProperties } from 'domain/entities/Transaction/Transaction';
 
 export type IRequestCreateTransactionDTO = Omit<ITransactionProperties, 'id'>;
 

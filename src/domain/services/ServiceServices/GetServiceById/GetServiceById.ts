@@ -1,4 +1,4 @@
-import Service from 'domain/entities/Service';
+import Service from 'domain/entities/Service/Service';
 import IServiceRepository from 'domain/ports/ServiceRepository';
 import { IRequestGetServiceByIdDTO } from 'domain/services/dto';
 import { DomainServiceResult } from 'domain/services/types';

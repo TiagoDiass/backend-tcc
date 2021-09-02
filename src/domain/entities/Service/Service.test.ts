@@ -1,4 +1,4 @@
-import Service from 'domain/entities/Service';
+import Service from './Service';
 
 describe('Entity: Service', () => {
   it('should instantiate a new Service correctly', () => {

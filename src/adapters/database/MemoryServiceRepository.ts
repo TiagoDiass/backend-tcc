@@ -1,4 +1,4 @@
-import Service from 'domain/entities/Service';
+import Service from 'domain/entities/Service/Service';
 import IRepositoryMethodResult from 'domain/ports/RepositoryMethodResult';
 import IServiceRepository from 'domain/ports/ServiceRepository';
 
