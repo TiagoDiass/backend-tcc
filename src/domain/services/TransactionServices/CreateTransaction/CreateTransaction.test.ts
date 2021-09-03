@@ -1,6 +1,6 @@
 import CreateTransaction from './CreateTransaction';
 import { IRequestCreateTransactionDTO } from 'domain/services/dto';
-import { mockTransactionsRepository } from '@testUtils/transactionsMocks';
+import { mockTransactionRepository } from '@testUtils/transactionsMocks';
 
 const UUID_MOCK = '1e16f407-1cef-427c-af39-e9c3efcbd18e';
 
@@ -11,7 +11,7 @@ jest.mock('uuid', () => ({
 describe('Service: CreateTransaction', () => {
   it('should call transactionRepository.save() and return correctly', async () => {
     const transactionRepositoryMock = {
-      ...mockTransactionsRepository(),
+      ...mockTransactionRepository(),
 
       save: jest.fn().mockImplementationOnce(transaction => ({
         data: transaction,
@@ -50,7 +50,30 @@ describe('Service: CreateTransaction', () => {
     });
   });
 
-  it.todo('should return correctly if Transaction entity throws an exception');
+  it('should return correctly if Transaction entity throws an exception', async () => {
+    const transactionRepositoryMock = mockTransactionRepository();
+
+    const createTransaction = new CreateTransaction(transactionRepositoryMock);
+
+    const createTransactionDTO: IRequestCreateTransactionDTO = {
+      title: '', // title empty so transaction entity will throw an exception
+      type: 'deposit',
+      date: '2021-09-02',
+      value: 7500, // 75 R$
+    };
+
+    const response = await createTransaction.execute(createTransactionDTO);
+
+    expect(transactionRepositoryMock.save).not.toHaveBeenCalled();
+
+    expect(response).toEqual({
+      status: 400,
+      error: {
+        message: 'Transação inválida',
+        errorsList: ['título da transação deve conter pelo menos 5 caracteres'],
+      },
+    });
+  });
 
   it.todo('should return correctly if TransactionRepository entity throws an exception');
 });
