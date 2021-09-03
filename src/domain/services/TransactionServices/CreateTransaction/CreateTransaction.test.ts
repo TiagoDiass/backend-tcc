@@ -75,5 +75,32 @@ describe('Service: CreateTransaction', () => {
     });
   });
 
-  it.todo('should return correctly if TransactionRepository entity throws an exception');
+  it('should return correctly if TransactionRepository entity throws an exception', async () => {
+    const transactionRepositoryMock = {
+      ...mockTransactionRepository(),
+
+      save: jest.fn().mockImplementationOnce(() => {
+        throw new Error('Erro mockado');
+      }),
+    };
+
+    const createTransaction = new CreateTransaction(transactionRepositoryMock);
+
+    const createTransactionDTO: IRequestCreateTransactionDTO = {
+      title: 'título da transação',
+      type: 'deposit',
+      value: 7500, // R$ 75
+      date: '2021-09-02',
+    };
+
+    const response = await createTransaction.execute(createTransactionDTO);
+
+    expect(response).toEqual({
+      status: 500,
+      error: {
+        message: 'Erro mockado',
+        errorsList: [],
+      },
+    });
+  });
 });
