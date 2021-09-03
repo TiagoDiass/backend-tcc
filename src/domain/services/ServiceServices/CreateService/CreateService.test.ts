@@ -2,10 +2,10 @@ import { CreateService } from 'domain/services/ServiceServices';
 import { IRequestCreateServiceDTO } from 'domain/services/dto';
 import { mockServiceRepository } from '@testUtils/servicesMocks';
 
-const mockedUUID = '1e16f407-1cef-427c-af39-e9c3efcbd18e';
+const UUID_MOCK = '1e16f407-1cef-427c-af39-e9c3efcbd18e';
 
 jest.mock('uuid', () => ({
-  v4: jest.fn().mockImplementation(() => mockedUUID),
+  v4: jest.fn().mockImplementation(() => UUID_MOCK),
 }));
 
 describe('Service: CreateService', () => {
@@ -28,7 +28,7 @@ describe('Service: CreateService', () => {
     const response = await createService.execute(createServiceDTO);
 
     expect(serviceRepositoryMock.save).toHaveBeenCalledWith({
-      id: mockedUUID,
+      id: UUID_MOCK,
       title: createServiceDTO.title,
       description: createServiceDTO.description,
     });
@@ -36,7 +36,7 @@ describe('Service: CreateService', () => {
     expect(response).toEqual({
       status: 201,
       result: {
-        id: mockedUUID,
+        id: UUID_MOCK,
         title: createServiceDTO.title,
         description: createServiceDTO.description,
       },
