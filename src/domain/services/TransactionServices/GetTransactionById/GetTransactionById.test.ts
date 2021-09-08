@@ -26,7 +26,41 @@ describe('Service: GetTransactionById', () => {
     });
   });
 
-  it.todo('should return correctly if transaction has not been found');
+  it('should return correctly if transaction has not been found', async () => {
+    const getTransactionByIdDTO = mockGetTransactionByIdDTO();
 
-  it.todo('should return correctly if TransactionRepository throws an exception');
+    const transactionRepositoryMock = {
+      ...mockTransactionRepository(),
+      findById: jest.fn().mockResolvedValue({ data: null }),
+    };
+
+    const getTransactionById = new GetTransactionById(transactionRepositoryMock);
+    const response = await getTransactionById.execute(getTransactionByIdDTO);
+
+    expect(response).toEqual({
+      status: 404,
+      error: {
+        message: 'Não há nenhuma transação cadastrada com o ID informado',
+      },
+    });
+  });
+
+  it('should return correctly if TransactionRepository throws an exception', async () => {
+    const transactionRepositoryMock = {
+      ...mockTransactionRepository(),
+      findById: jest.fn().mockImplementation(() => {
+        throw new Error('Erro mockado');
+      }),
+    };
+
+    const getTransactionById = new GetTransactionById(transactionRepositoryMock);
+    const response = await getTransactionById.execute(mockGetTransactionByIdDTO());
+
+    expect(response).toEqual({
+      status: 500,
+      error: {
+        message: 'Erro mockado',
+      },
+    });
+  });
 });
