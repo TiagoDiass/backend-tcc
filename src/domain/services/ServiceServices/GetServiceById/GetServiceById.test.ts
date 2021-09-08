@@ -28,8 +28,6 @@ describe('GetServiceById Service', () => {
   });
 
   it('should return correctly if service has not been found', async () => {
-    const getServiceByIdDTO = mockGetServiceByIdDTO();
-
     const serviceRepositoryMock = {
       ...mockServiceRepository(),
       findById: jest.fn().mockResolvedValue({ data: null }),
@@ -37,7 +35,7 @@ describe('GetServiceById Service', () => {
 
     const getServiceById = new GetServiceById(serviceRepositoryMock);
 
-    const response = await getServiceById.execute(getServiceByIdDTO);
+    const response = await getServiceById.execute(mockGetServiceByIdDTO());
 
     expect(response).toEqual({
       status: 404,
