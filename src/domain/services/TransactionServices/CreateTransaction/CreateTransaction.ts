@@ -19,13 +19,13 @@ export default class CreateTransaction {
         result: repoResult.data,
       };
     } catch (error) {
-      const isInvalidServiceError = error.type === 'invalid-transaction-error';
+      const isInvalidTransactionError = error.type === 'invalid-transaction-error';
 
       return {
-        status: isInvalidServiceError ? 400 : 500,
+        status: isInvalidTransactionError ? 400 : 500,
         error: {
           message: error.message,
-          errorsList: isInvalidServiceError ? error.errorsList : [],
+          errorsList: isInvalidTransactionError ? error.errorsList : [],
         },
       };
     }
