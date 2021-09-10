@@ -10,8 +10,10 @@ export type IRequestDeleteTransactionDTO = {
   id: string;
 };
 
-// export type IRequestUpdateTransactionDTO = {
-//   id: string;
-//   title: string;
-//   description?: string;
-// };
+export type IRequestUpdateTransactionDTO = {
+  id: string;
+  title: string;
+  value: number;
+  type: 'deposit' | 'withdraw';
+  date: string;
+};
