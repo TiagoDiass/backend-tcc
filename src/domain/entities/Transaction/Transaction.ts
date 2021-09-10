@@ -21,13 +21,7 @@ export default class Transaction {
   public type: 'deposit' | 'withdraw';
   public date: string;
 
-  constructor({
-    id = uuid(),
-    title,
-    value,
-    type,
-    date,
-  }: ITransactionProperties) {
+  constructor({ id = uuid(), title, value, type, date }: ITransactionProperties) {
     this.id = id;
     this.title = title;
     this.value = value;
@@ -70,9 +64,7 @@ export default class Transaction {
 
   private idValidation(id: string): FieldValidationReturn {
     return {
-      errors: Validations.id(id)
-        ? []
-        : ['ID da transação deve estar no padrão UUID V4'],
+      errors: Validations.id(id) ? [] : ['ID da transação deve estar no padrão UUID V4'],
     };
   }
 
@@ -114,7 +106,7 @@ export default class Transaction {
     const errors: string[] = [];
 
     if (typeof date !== 'string') {
-      errors.push('título da transação deve ser uma string');
+      errors.push('data da transação deve ser uma string');
     } else if (!Validations.date_YYYY_MM_DD(date)) {
       errors.push('data da transação deve estar no formato yyyy-mm-dd');
     }
