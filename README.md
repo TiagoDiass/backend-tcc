@@ -21,7 +21,7 @@
   - [x] Serviço de domínio CreateTransaction e seus testes;
   - [x] Serviço de domínio DeleteTransaction e seus testes;
   - [x] Serviço de domínio GetTransactionById e seus testes;
-  - [ ] Serviço de domínio EditTransaction e seus testes;
+  - [x] Serviço de domínio UpdateTransaction e seus testes;
   - [ ] Serviço de domínio de GetCurrentBalance e seus testes;
 
 - [ ] Animais:
