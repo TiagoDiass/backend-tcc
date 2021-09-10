@@ -1,6 +1,6 @@
 import Transaction from 'domain/entities/Transaction/Transaction';
 import ITransactionRepository from 'domain/ports/TransactionRepository';
-import { IRequestGetTransactionByIdDTO } from 'domain/services/dto';
+import { IRequestDeleteTransactionDTO, IRequestGetTransactionByIdDTO } from 'domain/services/dto';
 import faker from 'faker';
 
 export const mockTransactionRepository = (): ITransactionRepository => ({
@@ -20,5 +20,9 @@ export const mockTransaction = (): Transaction =>
   });
 
 export const mockGetTransactionByIdDTO = (): IRequestGetTransactionByIdDTO => ({
+  id: faker.datatype.uuid(),
+});
+
+export const mockDeleteTransactionDTO = (): IRequestDeleteTransactionDTO => ({
   id: faker.datatype.uuid(),
 });

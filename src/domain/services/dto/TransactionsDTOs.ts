@@ -6,9 +6,9 @@ export type IRequestGetTransactionByIdDTO = {
   id: string;
 };
 
-// export type IRequestDeleteTransactionDTO = {
-//   id: string;
-// };
+export type IRequestDeleteTransactionDTO = {
+  id: string;
+};
 
 // export type IRequestUpdateTransactionDTO = {
 //   id: string;
