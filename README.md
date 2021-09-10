@@ -17,11 +17,12 @@
 
   - [x] Entidade de Transação e seus testes;
   - [ ] Repositório de transações (MongoDB) e seus testes;
-  - [ ] Serviço de domínio ListTransactions e seus testes;
+  - [x] Serviço de domínio ListTransactions e seus testes;
   - [x] Serviço de domínio CreateTransaction e seus testes;
   - [x] Serviço de domínio DeleteTransaction e seus testes;
   - [x] Serviço de domínio GetTransactionById e seus testes;
   - [ ] Serviço de domínio EditTransaction e seus testes;
+  - [ ] Serviço de domínio de GetCurrentBalance e seus testes;
 
 - [ ] Animais:
 
