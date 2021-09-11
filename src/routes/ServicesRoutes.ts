@@ -1,5 +1,5 @@
 import ApiServiceController from 'adapters/api/ApiServiceController';
-import ServiceController from 'adapters/controllers/ServiceController';
+import ServiceController from 'adapters/controllers/ServiceController/ServiceController';
 import MemoryServiceRepository from 'adapters/database/MemoryServiceRepository';
 import { Router } from 'express';
 

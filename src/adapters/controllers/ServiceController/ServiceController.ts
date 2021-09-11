@@ -13,15 +13,6 @@ import {
   UpdateService,
 } from 'domain/services/ServiceServices';
 
-type ControllerMethodResult = {
-  status: number;
-  result: {
-    message: string;
-    data?: any;
-    errors?: string[];
-  };
-};
-
 export default class ServiceController {
   constructor(private readonly serviceRepository: IServiceRepository) {}
 

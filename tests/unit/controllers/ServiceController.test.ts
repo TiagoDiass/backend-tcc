@@ -1,4 +1,4 @@
-import ServiceController from 'adapters/controllers/ServiceController';
+import ServiceController from 'adapters/controllers/ServiceController/ServiceController';
 import {
   mockCreateServiceDTO,
   mockDeleteServiceDTO,

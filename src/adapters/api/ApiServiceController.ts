@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import ServiceController from 'adapters/controllers/ServiceController';
+import ServiceController from 'adapters/controllers/ServiceController/ServiceController';
 
 export default class ApiServiceController {
   constructor(private readonly servicesController: ServiceController) {}
