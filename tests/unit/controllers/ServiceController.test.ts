@@ -6,7 +6,7 @@ import {
   mockService,
   mockServiceRepository,
   mockUpdateServiceDTO,
-} from '../../utils/servicesMocks';
+} from '@testUtils/servicesMocks';
 
 const makeSut = () => {
   const serviceRepositoryMock = mockServiceRepository();
@@ -27,7 +27,7 @@ const mockListServicesExecute = jest
     throw new Error('Erro mockado');
   });
 
-jest.mock('domain/services/ServiceServices/ListServices', () => {
+jest.mock('domain/services/ServiceServices/ListServices/ListServices', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockListServicesExecute,
   }));
@@ -47,7 +47,7 @@ const mockCreateServiceExecute = jest
     throw new Error('Erro mockado');
   });
 
-jest.mock('domain/services/ServiceServices/CreateService', () => {
+jest.mock('domain/services/ServiceServices/CreateService/CreateService', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockCreateServiceExecute,
   }));
@@ -66,7 +66,7 @@ const mockDeleteServiceExecute = jest
     throw new Error('Erro mockado');
   });
 
-jest.mock('domain/services/ServiceServices/DeleteService', () => {
+jest.mock('domain/services/ServiceServices/DeleteService/DeleteService', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockDeleteServiceExecute,
   }));
@@ -85,7 +85,7 @@ const mockGetServiceByIdExecute = jest
     throw new Error('Erro mockado');
   });
 
-jest.mock('domain/services/ServiceServices/GetServiceById', () => {
+jest.mock('domain/services/ServiceServices/GetServiceById/GetServiceById', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockGetServiceByIdExecute,
   }));
@@ -105,7 +105,7 @@ const mockUpdateServiceExecute = jest
     throw new Error('Erro mockado');
   });
 
-jest.mock('domain/services/ServiceServices/UpdateService', () => {
+jest.mock('domain/services/ServiceServices/UpdateService/UpdateService', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockUpdateServiceExecute,
   }));
