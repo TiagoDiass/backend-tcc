@@ -19,7 +19,7 @@ export default class MongoConnection {
 
   constructor(private readonly accessData: AccessData) {}
 
-  public async getConnection() {
+  public async getConnection(): Promise<Db> {
     if (this.database) {
       return this.database;
     }
