@@ -1,12 +1,22 @@
 import ApiServiceController from 'adapters/api/ApiServiceController';
 import ServiceController from 'adapters/controllers/ServiceController/ServiceController';
-import MemoryServiceRepository from 'adapters/database/MemoryServiceRepository';
+import MongoConnection from 'adapters/database/connection/MongoConnection';
+import MongoServiceRepository from 'adapters/database/MongoServiceRepository';
 import { Router } from 'express';
 
 const routes = Router();
 
 const apiServiceController = new ApiServiceController(
-  new ServiceController(new MemoryServiceRepository())
+  new ServiceController(
+    new MongoServiceRepository(
+      new MongoConnection({
+        address: 'localhost',
+        user: 'mongodb',
+        password: 'backend_tcc',
+        databaseName: 'BACKEND_TCC',
+      })
+    )
+  )
 );
 
 routes.get('/', async (req, res) => await apiServiceController.list(req, res));
