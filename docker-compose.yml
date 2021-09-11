@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  tcc_backend_dev:
+    container_name: TCC_Backend_Dev
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+      - '/usr/src/app/node_modules'
+    environment:
+      - NODE_ENV=test
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - db_mongo
+    links:
+      - db_mongo
+    ports:
+      - 8080:8080
+    stdin_open: true
+    tty: true
+
+  db_mongo:
+    image: mongo:4.2.0
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongodb
+      - MONGO_INITDB_ROOT_PASSWORD=backend_tcc
