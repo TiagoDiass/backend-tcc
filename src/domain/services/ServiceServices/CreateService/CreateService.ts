@@ -18,7 +18,7 @@ export default class CreateService {
         status: 201,
         result: repoResult.data,
       };
-    } catch (error) {
+    } catch (error: any) {
       const isInvalidServiceError = error.type === 'invalid-service-error';
 
       return {

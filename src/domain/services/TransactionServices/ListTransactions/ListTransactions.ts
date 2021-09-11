@@ -13,7 +13,7 @@ export default class ListTransactions {
         status: 200,
         result: repoResult.data,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: 500,
         error: {

@@ -25,7 +25,7 @@ export default class GetServiceById {
         status: 200,
         result: service,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: 500,
         error: {

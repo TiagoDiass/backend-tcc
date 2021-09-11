@@ -41,7 +41,7 @@ export default class ServiceController {
           data: listServicesResponse.status === 200 ? listServicesResponse.result : [],
         },
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: 500,
         result: {
@@ -74,7 +74,7 @@ export default class ServiceController {
       }
 
       return response;
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: 500,
         result: {
@@ -103,7 +103,7 @@ export default class ServiceController {
           data: deleteServiceResult.result || null,
         },
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: 500,
         result: {
@@ -131,7 +131,7 @@ export default class ServiceController {
           data: getServiceByIdResult.result || null,
         },
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: 500,
         result: {
@@ -164,7 +164,7 @@ export default class ServiceController {
       }
 
       return response;
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: 500,
         result: {

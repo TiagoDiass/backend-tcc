@@ -40,11 +40,9 @@ export default class Service {
       const titleValidation = this.titleValidation(this.title);
       errors.push(...titleValidation.errors);
 
-      const descriptionValidation = this.descriptionValidation(
-        this.description
-      );
+      const descriptionValidation = this.descriptionValidation(this.description);
       errors.push(...descriptionValidation.errors);
-    } catch (error) {
+    } catch (error: any) {
       errors.push(error.message);
     }
 
@@ -53,9 +51,7 @@ export default class Service {
 
   private idValidation(id: string): FieldValidationReturn {
     return {
-      errors: Validations.id(id)
-        ? []
-        : ['ID do serviço deve estar no padrão UUID'],
+      errors: Validations.id(id) ? [] : ['ID do serviço deve estar no padrão UUID'],
     };
   }
 
@@ -79,9 +75,7 @@ export default class Service {
     if (typeof description !== 'string') {
       errors.push('descrição do serviço deve ser uma string');
     } else if (description.length > 150) {
-      errors.push(
-        'descrição do serviço não deve conter mais de 150 caracteres'
-      );
+      errors.push('descrição do serviço não deve conter mais de 150 caracteres');
     }
 
     return {

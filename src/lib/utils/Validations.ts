@@ -15,9 +15,7 @@ export default class Validations {
    * verifica se a data informada está no padrão YYYY-MM-DD
    */
   static date_YYYY_MM_DD(date: string) {
-    const regex = new RegExp(
-      /^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/
-    );
+    const regex = new RegExp(/^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/);
 
     if (!regex.test(date)) return false;
 
@@ -25,7 +23,7 @@ export default class Validations {
       format(new Date(`${date} 12:00:00`), 'yyyy-MM-dd');
 
       return true;
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       return false;
     }

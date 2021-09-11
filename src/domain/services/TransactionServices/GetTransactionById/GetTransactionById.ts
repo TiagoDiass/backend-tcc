@@ -27,7 +27,7 @@ export default class GetTransactionById {
         status: 200,
         result: transaction,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: 500,
         error: {

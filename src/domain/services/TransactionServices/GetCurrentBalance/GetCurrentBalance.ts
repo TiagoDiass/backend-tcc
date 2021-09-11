@@ -42,7 +42,7 @@ export default class GetCurrentBalance {
           withdraws: totalizers.withdraws / 100,
         },
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: 500,
         error: {

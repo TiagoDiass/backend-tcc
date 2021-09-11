@@ -54,8 +54,7 @@ export default class Transaction {
 
       const dateValidation = this.dateValidation(this.date);
       errors.push(...dateValidation.errors);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
       errors.push(error.message);
     }
 

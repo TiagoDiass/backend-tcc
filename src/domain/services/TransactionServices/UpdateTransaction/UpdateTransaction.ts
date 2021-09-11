@@ -31,7 +31,7 @@ export default class CreateTransaction {
         status: 200,
         result: repoResult.data,
       };
-    } catch (error) {
+    } catch (error: any) {
       const isInvalidTransactionError = error.type === 'invalid-transaction-error';
 
       return {

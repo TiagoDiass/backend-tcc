@@ -9,7 +9,7 @@ export default class ApiServiceController {
       const response = await this.servicesController.listServices();
 
       res.status(response.status).json(response.result);
-    } catch (error) {
+    } catch (error: any) {
       res.status(500).json(error.message);
     }
   }
@@ -24,7 +24,7 @@ export default class ApiServiceController {
       });
 
       res.status(response.status).json(response.result);
-    } catch (error) {
+    } catch (error: any) {
       res.status(500).json(error.message);
     }
   }
@@ -36,7 +36,7 @@ export default class ApiServiceController {
       const response = await this.servicesController.deleteService({ id });
 
       res.status(response.status).json(response.result);
-    } catch (error) {
+    } catch (error: any) {
       res.status(500).json(error.message);
     }
   }
@@ -48,7 +48,7 @@ export default class ApiServiceController {
       const response = await this.servicesController.getServiceById({ id });
 
       res.status(response.status).json(response.result);
-    } catch (error) {
+    } catch (error: any) {
       res.status(500).json(error.message);
     }
   }
@@ -65,7 +65,7 @@ export default class ApiServiceController {
       });
 
       res.status(response.status).json(response.result);
-    } catch (error) {
+    } catch (error: any) {
       res.status(500).json(error.message);
     }
   }
