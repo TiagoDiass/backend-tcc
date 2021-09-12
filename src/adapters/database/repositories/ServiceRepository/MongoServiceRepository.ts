@@ -1,7 +1,7 @@
 import Service from 'domain/entities/Service/Service';
 import IRepositoryMethodResult from 'domain/ports/RepositoryMethodResult';
 import IServiceRepository from 'domain/ports/ServiceRepository';
-import MongoConnection from './connection/MongoConnection';
+import MongoConnection from 'adapters/database/connection/MongoConnection';
 
 export default class MongoServiceRepository implements IServiceRepository {
   private readonly collectionName = 'Services';

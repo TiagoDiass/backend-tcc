@@ -1,7 +1,7 @@
 import ApiServiceController from 'adapters/api/ApiServiceController';
 import ServiceController from 'adapters/controllers/ServiceController/ServiceController';
 import MongoConnection from 'adapters/database/connection/MongoConnection';
-import MongoServiceRepository from 'adapters/database/MongoServiceRepository';
+import MongoServiceRepository from 'adapters/database/repositories/ServiceRepository/MongoServiceRepository';
 import { Router } from 'express';
 
 const routes = Router();
