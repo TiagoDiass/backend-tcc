@@ -2,27 +2,30 @@
 
 ### Tasks:
 
-- [ ] Serviços:
+- [x] Serviços:
 
   - [x] Entidade de Serviço e seus testes;
-  - [ ] Repositório de serviços (MongoDB) e seus testes;
+  - [x] Repositório de serviços (MongoDB) e seus testes;
   - [x] Serviço de domínio ListServices e seus testes;
   - [x] Serviço de domínio CreateService e seus testes;
   - [x] Serviço de domínio DeleteService e seus testes;
   - [x] Serviço de domínio GetServiceById e seus testes;
   - [x] Serviço de domínio UpdateService e seus testes;
-  - [x] Controller das rotas que utilizam esses serviços de domínio / casos de uso.
+  - [x] ServiceController e seus testes.
+  - [x] ApiServiceController (sem testes por enquanto)
 
 - [ ] Transações:
 
   - [x] Entidade de Transação e seus testes;
-  - [ ] Repositório de transações (MongoDB) e seus testes;
+  - [x] Repositório de transações (MongoDB) e seus testes;
   - [x] Serviço de domínio ListTransactions e seus testes;
   - [x] Serviço de domínio CreateTransaction e seus testes;
   - [x] Serviço de domínio DeleteTransaction e seus testes;
   - [x] Serviço de domínio GetTransactionById e seus testes;
   - [x] Serviço de domínio UpdateTransaction e seus testes;
-  - [ ] Serviço de domínio de GetCurrentBalance e seus testes;
+  - [x] Serviço de domínio de GetCurrentBalance e seus testes;
+  - [ ] TransactionController e seus testes
+  - [ ] ApiTransactionController (sem testes por enquanto)
 
 - [ ] Animais:
 
