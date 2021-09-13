@@ -45,11 +45,60 @@ describe('MongoDB Repository: ServiceRepository', () => {
     });
   });
 
-  test.todo('method: findById() - service found sucessfully');
+  test('method: findById() - service found sucessfully', async () => {
+    const service = mockService();
 
-  test.todo('method: findById() - service not found');
+    await (await mongoConnection.getConnection()).collection(COLLECTION_NAME).insertOne(service);
 
-  test.todo('method: delete()');
+    const response = await mongoServiceRepository.findById(service.id);
 
-  test.todo('method: update()');
+    expect(response.status).toBe(200);
+    expect(response.data).toBeInstanceOf(Service);
+    expect(response.data?.id).toBe(service.id);
+  });
+
+  test('method: findById() - service not found', async () => {
+    const response = await mongoServiceRepository.findById('fake-id');
+
+    expect(response.status).toBe(404);
+    expect(response.data).toBeNull();
+  });
+
+  test('method: delete()', async () => {
+    const service = mockService();
+
+    const dbCollection = (await mongoConnection.getConnection()).collection(COLLECTION_NAME);
+
+    await dbCollection.insertOne(service);
+
+    const response = await mongoServiceRepository.delete(service.id);
+
+    expect(response).toEqual({
+      status: 200,
+      data: service.id,
+    });
+
+    expect(await dbCollection.findOne({ id: service.id })).toBeNull();
+  });
+
+  test('method: update()', async () => {
+    const service = mockService();
+    const updatedService = new Service({
+      ...service,
+      title: 'título atualizado',
+    });
+
+    const dbCollection = (await mongoConnection.getConnection()).collection(COLLECTION_NAME);
+
+    await dbCollection.insertOne(service);
+
+    const response = await mongoServiceRepository.update(updatedService);
+
+    expect(response.status).toBe(200);
+    expect(response.data).toBeInstanceOf(Service);
+    expect(response.data).toMatchObject({
+      id: updatedService.id,
+      title: updatedService.title,
+    });
+  });
 });
