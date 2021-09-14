@@ -1,11 +1,11 @@
 import ITransactionRepository from 'domain/ports/TransactionRepository';
 import {
-  IRequestCreateServiceDTO,
   IRequestGetTransactionByIdDTO,
   IRequestUpdateTransactionDTO,
   IRequestDeleteTransactionDTO,
+  IRequestCreateTransactionDTO,
 } from 'domain/services/dto';
-import { ListTransactions } from 'domain/services/TransactionServices';
+import { CreateTransaction, ListTransactions } from 'domain/services/TransactionServices';
 
 export default class TransactionController {
   constructor(private readonly transactionRepository: ITransactionRepository) {}
@@ -31,6 +31,45 @@ export default class TransactionController {
         status: 500,
         result: {
           message: `Erro inesperado ao listar transações: ${
+            error.message || 'Erro sem mensagem...'
+          }`,
+        },
+      };
+    }
+  }
+
+  async createTransaction(
+    createTransactionDTO: IRequestCreateTransactionDTO
+  ): Promise<ControllerMethodResult> {
+    const createTransactionService = new CreateTransaction(this.transactionRepository);
+
+    try {
+      const createTransactionResponse = await createTransactionService.execute(
+        createTransactionDTO
+      );
+
+      const response: ControllerMethodResult = {
+        status: createTransactionResponse.status,
+        result: {
+          message:
+            createTransactionResponse.status === 201
+              ? 'Transação criada com sucesso'
+              : createTransactionResponse.error?.message,
+
+          data: createTransactionResponse.result || null,
+        },
+      };
+
+      if (createTransactionResponse.status !== 201) {
+        response.result.errors = createTransactionResponse.error?.errorsList;
+      }
+
+      return response;
+    } catch (error: any) {
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao executar a criação de um serviço: ${
             error.message || 'Erro sem mensagem...'
           }`,
         },

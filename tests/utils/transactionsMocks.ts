@@ -1,6 +1,7 @@
 import Transaction from 'domain/entities/Transaction/Transaction';
 import ITransactionRepository from 'domain/ports/TransactionRepository';
 import {
+  IRequestCreateTransactionDTO,
   IRequestDeleteTransactionDTO,
   IRequestGetTransactionByIdDTO,
   IRequestUpdateTransactionDTO,
@@ -22,6 +23,13 @@ export const mockTransaction = (): Transaction =>
     type: faker.random.arrayElement(['deposit', 'withdraw']),
     value: faker.datatype.number(),
   });
+
+export const mockCreateTransactionDTO = (): IRequestCreateTransactionDTO => ({
+  title: faker.random.words(2),
+  date: faker.date.recent().toISOString().split('T')[0],
+  type: faker.random.arrayElement(['deposit', 'withdraw']),
+  value: faker.datatype.number(),
+});
 
 export const mockGetTransactionByIdDTO = (): IRequestGetTransactionByIdDTO => ({
   id: faker.datatype.uuid(),
