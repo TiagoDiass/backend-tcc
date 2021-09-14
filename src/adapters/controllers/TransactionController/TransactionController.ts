@@ -69,7 +69,7 @@ export default class TransactionController {
       return {
         status: 500,
         result: {
-          message: `Erro inesperado ao executar a criação de um serviço: ${
+          message: `Erro inesperado ao executar a criação de uma transação: ${
             error.message || 'Erro sem mensagem...'
           }`,
         },

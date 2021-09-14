@@ -118,7 +118,7 @@ describe('Controller: TransactionController', () => {
       expect(response).toEqual({
         status: 500,
         result: {
-          message: 'Erro inesperado ao executar a criação de um serviço: Erro mockado',
+          message: 'Erro inesperado ao executar a criação de uma transação: Erro mockado',
         },
       });
     });
