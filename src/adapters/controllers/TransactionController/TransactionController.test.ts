@@ -1,6 +1,7 @@
 import TransactionController from './TransactionController';
 import {
   mockCreateTransactionDTO,
+  mockDeleteTransactionDTO,
   mockTransaction,
   mockTransactionRepository,
 } from '@testUtils/transactionsMocks';
@@ -45,6 +46,25 @@ const mockCreateTransactionExecute = jest
 jest.mock('domain/services/TransactionServices/CreateTransaction/CreateTransaction', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockCreateTransactionExecute,
+  }));
+});
+
+// DeleteTransaction mock
+const deletedTransactionMock = mockTransaction();
+const errorDeleteTransactionMock = {
+  message: 'Transação não encontrada',
+};
+const mockDeleteTransactionExecute = jest
+  .fn()
+  .mockResolvedValueOnce({ status: 200, result: deletedTransactionMock.id })
+  .mockResolvedValueOnce({ status: 404, error: errorDeleteTransactionMock })
+  .mockImplementationOnce(() => {
+    throw new Error('Erro mockado');
+  });
+
+jest.mock('domain/services/TransactionServices/DeleteTransaction/DeleteTransaction', () => {
+  return jest.fn().mockImplementation(() => ({
+    execute: mockDeleteTransactionExecute,
   }));
 });
 
@@ -119,6 +139,51 @@ describe('Controller: TransactionController', () => {
         status: 500,
         result: {
           message: 'Erro inesperado ao executar a criação de uma transação: Erro mockado',
+        },
+      });
+    });
+  });
+
+  describe('method: deleteTransaction', () => {
+    it('should return correctly (successfully deleted)', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.deleteTransaction({
+        id: deletedTransactionMock.id,
+      });
+
+      expect(response).toEqual({
+        status: 200,
+        result: {
+          message: 'Transação excluída com sucesso',
+          data: deletedTransactionMock.id,
+        },
+      });
+    });
+
+    it('should return correctly (transaction not found)', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.deleteTransaction(mockDeleteTransactionDTO());
+
+      expect(response).toEqual({
+        status: 404,
+        result: {
+          message: errorDeleteTransactionMock.message,
+          data: null,
+        },
+      });
+    });
+
+    it('should return correctly if an exceptions occurs', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.deleteTransaction(mockDeleteTransactionDTO());
+
+      expect(response).toEqual({
+        status: 500,
+        result: {
+          message: 'Erro inesperado ao excluir transação: Erro mockado',
         },
       });
     });

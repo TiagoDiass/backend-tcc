@@ -5,7 +5,11 @@ import {
   IRequestDeleteTransactionDTO,
   IRequestCreateTransactionDTO,
 } from 'domain/services/dto';
-import { CreateTransaction, ListTransactions } from 'domain/services/TransactionServices';
+import {
+  CreateTransaction,
+  DeleteTransaction,
+  ListTransactions,
+} from 'domain/services/TransactionServices';
 
 export default class TransactionController {
   constructor(private readonly transactionRepository: ITransactionRepository) {}
@@ -70,6 +74,37 @@ export default class TransactionController {
         status: 500,
         result: {
           message: `Erro inesperado ao executar a criação de uma transação: ${
+            error.message || 'Erro sem mensagem...'
+          }`,
+        },
+      };
+    }
+  }
+
+  async deleteTransaction(
+    deleteTransactionDTO: IRequestDeleteTransactionDTO
+  ): Promise<ControllerMethodResult> {
+    const deleteTransactionService = new DeleteTransaction(this.transactionRepository);
+
+    try {
+      const deleteTransactionResult = await deleteTransactionService.execute(deleteTransactionDTO);
+
+      return {
+        status: deleteTransactionResult.status,
+        result: {
+          message:
+            deleteTransactionResult.status === 200
+              ? 'Transação excluída com sucesso'
+              : deleteTransactionResult.error?.message,
+
+          data: deleteTransactionResult.result || null,
+        },
+      };
+    } catch (error: any) {
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao excluir transação: ${
             error.message || 'Erro sem mensagem...'
           }`,
         },
