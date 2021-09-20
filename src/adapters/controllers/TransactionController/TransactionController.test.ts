@@ -2,6 +2,7 @@ import TransactionController from './TransactionController';
 import {
   mockCreateTransactionDTO,
   mockDeleteTransactionDTO,
+  mockGetTransactionByIdDTO,
   mockTransaction,
   mockTransactionRepository,
 } from '@testUtils/transactionsMocks';
@@ -65,6 +66,25 @@ const mockDeleteTransactionExecute = jest
 jest.mock('domain/services/TransactionServices/DeleteTransaction/DeleteTransaction', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockDeleteTransactionExecute,
+  }));
+});
+
+// GetTransactionById mock
+const foundTransactionMock = mockTransaction();
+const errorGetTransactionByIdMock = {
+  message: 'Transação não encontrada',
+};
+const mockGetTransactionByIdExecute = jest
+  .fn()
+  .mockResolvedValueOnce({ status: 200, result: foundTransactionMock })
+  .mockResolvedValueOnce({ status: 404, error: errorGetTransactionByIdMock })
+  .mockImplementationOnce(() => {
+    throw new Error('Erro mockado');
+  });
+
+jest.mock('domain/services/TransactionServices/GetTransactionById/GetTransactionById', () => {
+  return jest.fn().mockImplementation(() => ({
+    execute: mockGetTransactionByIdExecute,
   }));
 });
 
@@ -184,6 +204,49 @@ describe('Controller: TransactionController', () => {
         status: 500,
         result: {
           message: 'Erro inesperado ao excluir transação: Erro mockado',
+        },
+      });
+    });
+  });
+
+  describe('getTransactionById method', () => {
+    it('should return correctly (transaction successfully found)', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.getTransactionById(mockGetTransactionByIdDTO());
+
+      expect(response).toEqual({
+        status: 200,
+        result: {
+          message: 'Transação obtida com sucesso',
+          data: foundTransactionMock,
+        },
+      });
+    });
+
+    it('should return correctly (transaction not found)', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.getTransactionById(mockGetTransactionByIdDTO());
+
+      expect(response).toEqual({
+        status: 404,
+        result: {
+          message: errorGetTransactionByIdMock.message,
+          data: null,
+        },
+      });
+    });
+
+    it('should return correctly if an exception occurs', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.getTransactionById(mockGetTransactionByIdDTO());
+
+      expect(response).toEqual({
+        status: 500,
+        result: {
+          message: 'Erro inesperado ao obter transação: Erro mockado',
         },
       });
     });

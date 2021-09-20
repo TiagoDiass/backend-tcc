@@ -8,6 +8,7 @@ import {
 import {
   CreateTransaction,
   DeleteTransaction,
+  GetTransactionById,
   ListTransactions,
 } from 'domain/services/TransactionServices';
 
@@ -107,6 +108,34 @@ export default class TransactionController {
           message: `Erro inesperado ao excluir transação: ${
             error.message || 'Erro sem mensagem...'
           }`,
+        },
+      };
+    }
+  }
+
+  async getTransactionById(
+    getTransactionByIdDTO: IRequestGetTransactionByIdDTO
+  ): Promise<ControllerMethodResult> {
+    const getTransactionById = new GetTransactionById(this.transactionRepository);
+
+    try {
+      const getTransactionByIdResult = await getTransactionById.execute(getTransactionByIdDTO);
+
+      return {
+        status: getTransactionByIdResult.status,
+        result: {
+          message:
+            getTransactionByIdResult.status === 200
+              ? 'Transação obtida com sucesso'
+              : getTransactionByIdResult.error?.message,
+          data: getTransactionByIdResult.result || null,
+        },
+      };
+    } catch (error: any) {
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao obter transação: ${error.message || 'Erro sem mensagem...'}`,
         },
       };
     }
