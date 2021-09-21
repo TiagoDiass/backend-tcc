@@ -10,6 +10,7 @@ import {
   DeleteTransaction,
   GetTransactionById,
   ListTransactions,
+  UpdateTransaction,
 } from 'domain/services/TransactionServices';
 
 export default class TransactionController {
@@ -136,6 +137,45 @@ export default class TransactionController {
         status: 500,
         result: {
           message: `Erro inesperado ao obter transação: ${error.message || 'Erro sem mensagem...'}`,
+        },
+      };
+    }
+  }
+
+  async updateTransaction(
+    updateTransactionDTO: IRequestUpdateTransactionDTO
+  ): Promise<ControllerMethodResult> {
+    const updateTransactionService = new UpdateTransaction(this.transactionRepository);
+
+    try {
+      const updateTransactionResponse = await updateTransactionService.execute(
+        updateTransactionDTO
+      );
+
+      const response: ControllerMethodResult = {
+        status: updateTransactionResponse.status,
+        result: {
+          message:
+            updateTransactionResponse.status === 200
+              ? 'Transação atualizada com sucesso'
+              : updateTransactionResponse.error?.message,
+
+          data: updateTransactionResponse.result || null,
+        },
+      };
+
+      if (![200, 404].includes(updateTransactionResponse.status)) {
+        response.result.errors = updateTransactionResponse.error?.errorsList;
+      }
+
+      return response;
+    } catch (error: any) {
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao executar a atualização de uma transação: ${
+            error.message || 'Erro sem mensagem...'
+          }`,
         },
       };
     }

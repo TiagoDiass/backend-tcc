@@ -5,6 +5,7 @@ import {
   mockGetTransactionByIdDTO,
   mockTransaction,
   mockTransactionRepository,
+  mockUpdateTransactionDTO,
 } from '@testUtils/transactionsMocks';
 
 const makeSut = () => {
@@ -35,7 +36,7 @@ const createdTransactionMock = mockTransaction();
 const errorCreateTransactionMock = {
   message: 'Erro ao criar transação',
   errorsList: ['campo inválido 1', 'campo inválido 2'],
-};
+} as const;
 const mockCreateTransactionExecute = jest
   .fn()
   .mockResolvedValueOnce({ status: 201, result: createdTransactionMock })
@@ -54,7 +55,7 @@ jest.mock('domain/services/TransactionServices/CreateTransaction/CreateTransacti
 const deletedTransactionMock = mockTransaction();
 const errorDeleteTransactionMock = {
   message: 'Transação não encontrada',
-};
+} as const;
 const mockDeleteTransactionExecute = jest
   .fn()
   .mockResolvedValueOnce({ status: 200, result: deletedTransactionMock.id })
@@ -73,7 +74,7 @@ jest.mock('domain/services/TransactionServices/DeleteTransaction/DeleteTransacti
 const foundTransactionMock = mockTransaction();
 const errorGetTransactionByIdMock = {
   message: 'Transação não encontrada',
-};
+} as const;
 const mockGetTransactionByIdExecute = jest
   .fn()
   .mockResolvedValueOnce({ status: 200, result: foundTransactionMock })
@@ -85,6 +86,26 @@ const mockGetTransactionByIdExecute = jest
 jest.mock('domain/services/TransactionServices/GetTransactionById/GetTransactionById', () => {
   return jest.fn().mockImplementation(() => ({
     execute: mockGetTransactionByIdExecute,
+  }));
+});
+
+// UpdateTransaction mock
+const updatedTransactionMock = mockTransaction();
+const errorUpdateTransactionMock = {
+  message: 'Erro ao atualizar transação',
+  errorsList: ['campo inválido 1', 'campo inválido 2'],
+} as const;
+const mockUpdateTransactionExecute = jest
+  .fn()
+  .mockResolvedValueOnce({ status: 200, result: updatedTransactionMock })
+  .mockResolvedValueOnce({ status: 400, error: errorUpdateTransactionMock })
+  .mockImplementationOnce(() => {
+    throw new Error('Erro mockado');
+  });
+
+jest.mock('domain/services/TransactionServices/UpdateTransaction/UpdateTransaction', () => {
+  return jest.fn().mockImplementation(() => ({
+    execute: mockUpdateTransactionExecute,
   }));
 });
 
@@ -247,6 +268,50 @@ describe('Controller: TransactionController', () => {
         status: 500,
         result: {
           message: 'Erro inesperado ao obter transação: Erro mockado',
+        },
+      });
+    });
+  });
+
+  describe('updateTransaction method', () => {
+    it('should return correctly (updated succesfully)', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.updateTransaction(mockUpdateTransactionDTO());
+
+      expect(response).toEqual({
+        status: 200,
+        result: {
+          message: 'Transação atualizada com sucesso',
+          data: updatedTransactionMock,
+        },
+      });
+    });
+
+    it('should return correctly (not updated, invalid fields)', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.updateTransaction(mockUpdateTransactionDTO());
+
+      expect(response).toEqual({
+        status: 400,
+        result: {
+          message: errorUpdateTransactionMock.message,
+          data: null,
+          errors: errorUpdateTransactionMock.errorsList,
+        },
+      });
+    });
+
+    it('should return correctly if an exception occurs', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.updateTransaction(mockUpdateTransactionDTO());
+
+      expect(response).toEqual({
+        status: 500,
+        result: {
+          message: 'Erro inesperado ao executar a atualização de uma transação: Erro mockado',
         },
       });
     });
