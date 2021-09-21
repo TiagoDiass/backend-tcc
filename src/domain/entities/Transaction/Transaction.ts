@@ -82,6 +82,12 @@ export default class Transaction {
   }
 
   private valueValidation(value: number): FieldValidationReturn {
+    if (!value || typeof value !== 'number') {
+      return {
+        errors: ['valor da transação deve ser um número'],
+      };
+    }
+
     return {
       errors: value <= 0 ? ['valor da transação deve ser maior que zero'] : [],
     };

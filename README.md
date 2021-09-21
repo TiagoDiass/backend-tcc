@@ -14,7 +14,7 @@
   - [x] ServiceController e seus testes.
   - [x] ApiServiceController (sem testes por enquanto)
 
-- [ ] Transações:
+- [x] Transações:
 
   - [x] Entidade de Transação e seus testes;
   - [x] Repositório de transações (MongoDB) e seus testes;
@@ -24,8 +24,8 @@
   - [x] Serviço de domínio GetTransactionById e seus testes;
   - [x] Serviço de domínio UpdateTransaction e seus testes;
   - [x] Serviço de domínio de GetCurrentBalance e seus testes;
-  - [ ] TransactionController e seus testes
-  - [ ] ApiTransactionController (sem testes por enquanto)
+  - [x] TransactionController e seus testes
+  - [x] ApiTransactionController (sem testes por enquanto)
 
 - [ ] Animais:
 
