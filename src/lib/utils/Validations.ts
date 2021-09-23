@@ -28,4 +28,12 @@ export default class Validations {
       return false;
     }
   }
+
+  /**
+   * verifica se a URL informada é válida
+   */
+  static url(url: string) {
+    let re = new RegExp(/^[a-zA-Z0-9-_]+[:./\\]+([a-zA-Z0-9 -_./:=&"'?%+@#$!])+$/g);
+    return re.test(url);
+  }
 }
