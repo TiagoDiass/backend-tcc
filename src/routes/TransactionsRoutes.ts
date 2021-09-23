@@ -29,4 +29,9 @@ routes.get('/:id', async (req, res) => await apiTransactionController.getById(re
 
 routes.put('/update/:id', async (req, res) => await apiTransactionController.update(req, res));
 
+routes.get(
+  '/balance/totalizers',
+  async (req, res) => await apiTransactionController.getCurrentBalance(req, res)
+);
+
 export default routes;

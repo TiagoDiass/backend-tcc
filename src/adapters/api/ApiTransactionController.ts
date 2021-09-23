@@ -73,4 +73,14 @@ export default class ApiTransactionController {
       res.status(500).json(error.message);
     }
   }
+
+  async getCurrentBalance(req: Request, res: Response) {
+    try {
+      const response = await this.transactionsController.getCurrentBalance();
+
+      res.status(response.status).json(response.result);
+    } catch (error: any) {
+      res.status(500).json(error.message);
+    }
+  }
 }
