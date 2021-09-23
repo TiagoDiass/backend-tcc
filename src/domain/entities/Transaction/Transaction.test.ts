@@ -47,7 +47,7 @@ describe('Entity: Transaction', () => {
         type: 'deposit',
         date: '2021-05-18',
       });
-    } catch (err) {
+    } catch (err: any) {
       error = err;
     }
 
@@ -65,7 +65,7 @@ describe('Entity: Transaction', () => {
         type: 'deposit',
         date: '2021-05-18',
       });
-    } catch (err) {
+    } catch (err: any) {
       error = err;
     }
 
@@ -83,7 +83,7 @@ describe('Entity: Transaction', () => {
         type: 'deposit',
         date: '2021-05-18',
       });
-    } catch (err) {
+    } catch (err: any) {
       error = err;
     }
 
@@ -101,7 +101,7 @@ describe('Entity: Transaction', () => {
         type: 'deposit',
         date: '15/12/2021',
       });
-    } catch (err) {
+    } catch (err: any) {
       error = err;
     }
 

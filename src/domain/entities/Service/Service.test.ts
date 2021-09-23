@@ -42,7 +42,7 @@ describe('Entity: Service', () => {
         title: 'Título do serviço',
         description: 'Descrição do serviço',
       });
-    } catch (err) {
+    } catch (err: any) {
       error = err;
     }
 
@@ -58,7 +58,7 @@ describe('Entity: Service', () => {
         title: '1234',
         description: 'Descrição do serviço',
       });
-    } catch (err) {
+    } catch (err: any) {
       error = err;
     }
 
@@ -79,7 +79,7 @@ describe('Entity: Service', () => {
             Duis faucibus rutrum bibendum. Maecenas vitae venenatis turpis.
           `,
       });
-    } catch (err) {
+    } catch (err: any) {
       error = err;
     }
 
