@@ -109,6 +109,26 @@ jest.mock('domain/services/TransactionServices/UpdateTransaction/UpdateTransacti
   }));
 });
 
+// GetCurrentBalance mock
+const balanceToBeReturned = {
+  total: 165.5,
+  entries: 265.5,
+  withdraws: 100,
+} as const;
+
+const mockGetCurrentBalanceExecute = jest
+  .fn()
+  .mockResolvedValueOnce({ status: 200, result: balanceToBeReturned })
+  .mockImplementationOnce(() => {
+    throw new Error('Erro mockado');
+  });
+
+jest.mock('domain/services/TransactionServices/GetCurrentBalance/GetCurrentBalance', () => {
+  return jest.fn().mockImplementation(() => ({
+    execute: mockGetCurrentBalanceExecute,
+  }));
+});
+
 describe('Controller: TransactionController', () => {
   describe('method: listTransactions', () => {
     it('should return correctly (list successfully)', async () => {
@@ -312,6 +332,35 @@ describe('Controller: TransactionController', () => {
         status: 500,
         result: {
           message: 'Erro inesperado ao executar a atualização de uma transação: Erro mockado',
+        },
+      });
+    });
+  });
+
+  describe('getCurrentBalance method', () => {
+    it('should return correctly (balance retrieved successfully)', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.getCurrentBalance();
+
+      expect(response).toEqual({
+        status: 200,
+        result: {
+          message: 'Saldo atual e totalizadores obtidos com sucesso',
+          data: balanceToBeReturned,
+        },
+      });
+    });
+
+    it('should return correctly if an exception occurs', async () => {
+      const { transactionController } = makeSut();
+
+      const response = await transactionController.getCurrentBalance();
+
+      expect(response).toEqual({
+        status: 500,
+        result: {
+          message: 'Erro inesperado ao obter saldo atual e totalizadores: Erro mockado',
         },
       });
     });

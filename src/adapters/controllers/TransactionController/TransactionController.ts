@@ -8,6 +8,7 @@ import {
 import {
   CreateTransaction,
   DeleteTransaction,
+  GetCurrentBalance,
   GetTransactionById,
   ListTransactions,
   UpdateTransaction,
@@ -174,6 +175,34 @@ export default class TransactionController {
         status: 500,
         result: {
           message: `Erro inesperado ao executar a atualização de uma transação: ${
+            error.message || 'Erro sem mensagem...'
+          }`,
+        },
+      };
+    }
+  }
+
+  async getCurrentBalance(): Promise<ControllerMethodResult> {
+    const getCurrentBalanceService = new GetCurrentBalance(this.transactionRepository);
+
+    try {
+      const getCurrentBalanceResponse = await getCurrentBalanceService.execute();
+
+      return {
+        status: getCurrentBalanceResponse.status,
+        result: {
+          message:
+            getCurrentBalanceResponse.status === 200
+              ? 'Saldo atual e totalizadores obtidos com sucesso'
+              : getCurrentBalanceResponse.error?.message,
+          data: getCurrentBalanceResponse.status === 200 ? getCurrentBalanceResponse.result : [],
+        },
+      };
+    } catch (error: any) {
+      return {
+        status: 500,
+        result: {
+          message: `Erro inesperado ao obter saldo atual e totalizadores: ${
             error.message || 'Erro sem mensagem...'
           }`,
         },
