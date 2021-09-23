@@ -1,16 +1,13 @@
 import InvalidServiceError from 'domain/exceptions/InvalidServiceError';
 import { Validations } from 'lib/utils';
 import { v4 as uuid } from 'uuid';
+import { FieldValidationReturn } from 'domain/entities/types';
 
 export interface IServiceProperties {
   id?: string;
   title: string;
   description?: string;
 }
-
-type FieldValidationReturn = {
-  errors: string[];
-};
 
 export default class Service {
   public id: string;

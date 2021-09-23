@@ -1,6 +1,7 @@
 import InvalidTransactionError from 'domain/exceptions/InvalidTransactionError';
 import { Validations } from 'lib/utils';
 import { v4 as uuid } from 'uuid';
+import { FieldValidationReturn } from '../types';
 
 export interface ITransactionProperties {
   id?: string;
@@ -9,10 +10,6 @@ export interface ITransactionProperties {
   type: 'deposit' | 'withdraw';
   date: string;
 }
-
-type FieldValidationReturn = {
-  errors: string[];
-};
 
 export default class Transaction {
   public id: string;
