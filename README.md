@@ -33,8 +33,8 @@
   - [ ] Repositório de animais (MongoDB) e seus testes;
   - [x] Serviço de domínio ListAnimals e seus testes;
   - [ ] Serviço de domínio CreateAnimal e seus testes;
-  - [ ] Serviço de domínio DeleteAnimal e seus testes;
-  - [ ] Serviço de domínio GetAnimalById e seus testes;
+  - [x] Serviço de domínio DeleteAnimal e seus testes;
+  - [x] Serviço de domínio GetAnimalById e seus testes;
   - [ ] Serviço de domínio EditAnimal e seus testes;
 
 - [ ] Produtos:
