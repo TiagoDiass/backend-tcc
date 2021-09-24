@@ -29,9 +29,9 @@
 
 - [ ] Animais:
 
-  - [ ] Entidade de Animal e seus testes;
+  - [x] Entidade de Animal e seus testes;
   - [ ] Repositório de animais (MongoDB) e seus testes;
-  - [ ] Serviço de domínio ListAnimals e seus testes;
+  - [x] Serviço de domínio ListAnimals e seus testes;
   - [ ] Serviço de domínio CreateAnimal e seus testes;
   - [ ] Serviço de domínio DeleteAnimal e seus testes;
   - [ ] Serviço de domínio GetAnimalById e seus testes;
