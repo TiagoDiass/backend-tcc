@@ -40,7 +40,7 @@ describe('Service: GetAnimalById', () => {
     });
   });
 
-  it('should return correctly if TransactionRepository throws an exception', async () => {
+  it('should return correctly if AnimalRepository throws an exception', async () => {
     const animalRepositoryMock: IAnimalRepository = {
       ...mockAnimalRepository(),
       findById: jest.fn().mockImplementation(() => {
