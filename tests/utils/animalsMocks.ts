@@ -24,3 +24,7 @@ export const mockAnimal = (): Animal =>
     size: faker.random.arrayElement(['G', 'M', 'P']),
     pictureUrl: faker.image.imageUrl(undefined, undefined, 'animals', false, true),
   });
+
+export const mockDeleteAnimalDTO = (): IRequestDeleteAnimalDTO => ({
+  id: faker.datatype.uuid(),
+});
