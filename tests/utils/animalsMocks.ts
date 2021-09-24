@@ -28,3 +28,7 @@ export const mockAnimal = (): Animal =>
 export const mockDeleteAnimalDTO = (): IRequestDeleteAnimalDTO => ({
   id: faker.datatype.uuid(),
 });
+
+export const mockGetAnimalByIdDTO = (): IRequestGetAnimalByIdDTO => ({
+  id: faker.datatype.uuid(),
+});
