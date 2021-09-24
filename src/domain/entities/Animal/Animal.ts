@@ -104,7 +104,7 @@ export default class Animal {
     if (typeof size !== 'string') {
       errors.push('porte do animal deve ser uma string');
     } else if (!['G', 'M', 'P'].includes(size)) {
-      errors.push('porte do animal deve ser "G", "M", ou "P"');
+      errors.push('porte do animal deve ser "G", "M" ou "P"');
     }
 
     return {

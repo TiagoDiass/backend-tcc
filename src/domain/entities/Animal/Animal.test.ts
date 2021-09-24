@@ -133,19 +133,156 @@ describe('Entity: Animal', () => {
     expect(error.errorsList).toEqual(['tipo do animal deve ser "dog" ou "cat"']);
   });
 
-  it.todo('should throw an InvalidAnimalError if size is not a string');
+  it('should throw an InvalidAnimalError if size is not a string', () => {
+    let error;
 
-  it.todo('should throw an InvalidAnimalError if size is not "G", "M" or "P"');
+    try {
+      new Animal({
+        id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
+        name: 'Twister',
+        type: 'cat',
+        size: 123 as unknown as IAnimalProperties['size'],
+        gender: 'M',
+      });
+    } catch (err: any) {
+      error = err;
+    }
 
-  it.todo('should throw an InvalidAnimalError if gender is not a string');
+    expect(error.type).toBe('invalid-animal-error');
+    expect(error.errorsList).toEqual(['porte do animal deve ser uma string']);
+  });
 
-  it.todo('should throw an InvalidAnimalError if gender is not "M" or "F"');
+  it('should throw an InvalidAnimalError if size is not "G", "M" or "P"', () => {
+    let error;
 
-  it.todo('should throw an InvalidAnimalError if pictureUrl is not a string');
+    try {
+      new Animal({
+        id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
+        name: 'Twister',
+        type: 'cat',
+        size: 'invalid' as IAnimalProperties['size'],
+        gender: 'M',
+      });
+    } catch (err: any) {
+      error = err;
+    }
 
-  it.todo('should throw an InvalidAnimalError if pictureUrl is not a valid URL');
+    expect(error.type).toBe('invalid-animal-error');
+    expect(error.errorsList).toEqual(['porte do animal deve ser "G", "M" ou "P"']);
+  });
 
-  it.todo('should instantiate a new Animal correctly without passing a pictureUrl');
+  it('should throw an InvalidAnimalError if gender is not a string', () => {
+    let error;
 
-  it.todo('should instantiate a new Animal correctly passing a pictureUrl in parameters');
+    try {
+      new Animal({
+        id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
+        name: 'Badu',
+        type: 'cat',
+        size: 'G',
+        gender: 123 as unknown as IAnimalProperties['gender'],
+      });
+    } catch (err: any) {
+      error = err;
+    }
+
+    expect(error.type).toBe('invalid-animal-error');
+    expect(error.errorsList).toEqual(['sexo do animal deve ser uma string']);
+  });
+
+  it('should throw an InvalidAnimalError if gender is not "M" or "F"', () => {
+    let error;
+
+    try {
+      new Animal({
+        id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
+        name: 'Twister',
+        type: 'cat',
+        size: 'G',
+        gender: 'invalid' as IAnimalProperties['gender'],
+      });
+    } catch (err: any) {
+      error = err;
+    }
+
+    expect(error.type).toBe('invalid-animal-error');
+    expect(error.errorsList).toEqual(['sexo do animal deve ser "M" ou "F"']);
+  });
+
+  it('should throw an InvalidAnimalError if pictureUrl is not a string', () => {
+    let error;
+
+    try {
+      new Animal({
+        name: 'Twister',
+        type: 'cat',
+        size: 'G',
+        gender: 'F',
+        pictureUrl: 123 as unknown as string,
+      });
+    } catch (err: any) {
+      error = err;
+    }
+
+    expect(error.type).toBe('invalid-animal-error');
+    expect(error.errorsList).toEqual(['URL da foto do animal deve ser uma string']);
+  });
+
+  it('should throw an InvalidAnimalError if pictureUrl is not a valid URL', () => {
+    let error;
+
+    try {
+      new Animal({
+        name: 'Twister',
+        type: 'cat',
+        size: 'G',
+        gender: 'F',
+        pictureUrl: 'invalid-url',
+      });
+    } catch (err: any) {
+      error = err;
+    }
+
+    expect(error.type).toBe('invalid-animal-error');
+    expect(error.errorsList).toEqual(['URL da foto do animal deve ser uma URL válida']);
+  });
+
+  it('should instantiate a new Animal correctly without passing a pictureUrl', () => {
+    const animal = new Animal({
+      id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
+      name: 'Twister',
+      type: 'cat',
+      size: 'G',
+      gender: 'F',
+    });
+
+    expect(animal).toEqual({
+      id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
+      name: 'Twister',
+      type: 'cat',
+      size: 'G',
+      gender: 'F',
+      pictureUrl: '',
+    });
+  });
+
+  it('should instantiate a new Animal correctly passing a pictureUrl in parameters', () => {
+    const animal = new Animal({
+      id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
+      name: 'Twister',
+      type: 'cat',
+      size: 'G',
+      gender: 'F',
+      pictureUrl: 'https://www.google.com',
+    });
+
+    expect(animal).toEqual({
+      id: '25a30cf4-dc54-4470-9fd6-9c737102e73b',
+      name: 'Twister',
+      type: 'cat',
+      size: 'G',
+      gender: 'F',
+      pictureUrl: 'https://www.google.com',
+    });
+  });
 });
