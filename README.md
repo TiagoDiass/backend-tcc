@@ -30,12 +30,14 @@
 - [ ] Animais:
 
   - [x] Entidade de Animal e seus testes;
-  - [ ] Repositório de animais (MongoDB) e seus testes;
+  - [x] Repositório de animais (MongoDB) e seus testes;
   - [x] Serviço de domínio ListAnimals e seus testes;
   - [x] Serviço de domínio CreateAnimal e seus testes;
   - [x] Serviço de domínio DeleteAnimal e seus testes;
   - [x] Serviço de domínio GetAnimalById e seus testes;
   - [x] Serviço de domínio UpdateAnimal e seus testes;
+  - [ ] AnimalController e seus testes
+  - [ ] ApiAnimalController (sem testes por enquanto)
 
 - [ ] Produtos:
 
