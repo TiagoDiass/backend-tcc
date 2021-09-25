@@ -75,7 +75,7 @@ describe('Service: CreateTransaction', () => {
     });
   });
 
-  it('should return correctly if TransactionRepository entity throws an exception', async () => {
+  it('should return correctly if TransactionRepository throws an exception', async () => {
     const transactionRepositoryMock = {
       ...mockTransactionRepository(),
 
