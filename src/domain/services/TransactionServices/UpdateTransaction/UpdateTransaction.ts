@@ -1,9 +1,9 @@
 import Transaction from 'domain/entities/Transaction/Transaction';
 import ITransactionRepository from 'domain/ports/TransactionRepository';
-import { IRequestCreateTransactionDTO, IRequestUpdateTransactionDTO } from 'domain/services/dto';
+import { IRequestUpdateTransactionDTO } from 'domain/services/dto';
 import { DomainServiceResult } from 'domain/services/types';
 
-export default class CreateTransaction {
+export default class UpdateTransaction {
   constructor(private readonly transactionRepository: ITransactionRepository) {}
 
   async execute(

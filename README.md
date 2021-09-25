@@ -35,7 +35,7 @@
   - [x] Serviço de domínio CreateAnimal e seus testes;
   - [x] Serviço de domínio DeleteAnimal e seus testes;
   - [x] Serviço de domínio GetAnimalById e seus testes;
-  - [ ] Serviço de domínio EditAnimal e seus testes;
+  - [ ] Serviço de domínio UpdateAnimal e seus testes;
 
 - [ ] Produtos:
 
