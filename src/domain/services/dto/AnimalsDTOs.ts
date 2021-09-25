@@ -6,4 +6,4 @@ export type IRequestGetAnimalByIdDTO = { id: string };
 
 export type IRequestDeleteAnimalDTO = { id: string };
 
-export type IRequestUpdateAnimalDTO = IAnimalProperties;
+export type IRequestUpdateAnimalDTO = IAnimalProperties & { id: string }; // id is optional on IAnimalProperties, but not here

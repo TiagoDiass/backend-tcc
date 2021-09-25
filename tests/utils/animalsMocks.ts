@@ -33,6 +33,15 @@ export const mockCreateAnimalDTO = (): IRequestCreateAnimalDTO => ({
   pictureUrl: faker.image.imageUrl(undefined, undefined, 'animals', false, true),
 });
 
+export const mockUpdateAnimalDTO = (): IRequestUpdateAnimalDTO => ({
+  id: faker.datatype.uuid(),
+  name: faker.random.word(),
+  gender: faker.random.arrayElement(['M', 'F']),
+  type: faker.random.arrayElement(['dog', 'cat']),
+  size: faker.random.arrayElement(['G', 'M', 'P']),
+  pictureUrl: faker.image.imageUrl(undefined, undefined, 'animals', false, true),
+});
+
 export const mockDeleteAnimalDTO = (): IRequestDeleteAnimalDTO => ({
   id: faker.datatype.uuid(),
 });
