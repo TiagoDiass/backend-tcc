@@ -32,7 +32,7 @@
   - [x] Entidade de Animal e seus testes;
   - [ ] Repositório de animais (MongoDB) e seus testes;
   - [x] Serviço de domínio ListAnimals e seus testes;
-  - [ ] Serviço de domínio CreateAnimal e seus testes;
+  - [x] Serviço de domínio CreateAnimal e seus testes;
   - [x] Serviço de domínio DeleteAnimal e seus testes;
   - [x] Serviço de domínio GetAnimalById e seus testes;
   - [ ] Serviço de domínio EditAnimal e seus testes;
