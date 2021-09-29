@@ -27,7 +27,7 @@
   - [x] TransactionController e seus testes
   - [x] ApiTransactionController (sem testes por enquanto)
 
-- [ ] Animais:
+- [x] Animais:
 
   - [x] Entidade de Animal e seus testes;
   - [x] Repositório de animais (MongoDB) e seus testes;
@@ -36,8 +36,8 @@
   - [x] Serviço de domínio DeleteAnimal e seus testes;
   - [x] Serviço de domínio GetAnimalById e seus testes;
   - [x] Serviço de domínio UpdateAnimal e seus testes;
-  - [ ] AnimalController e seus testes
-  - [ ] ApiAnimalController (sem testes por enquanto)
+  - [x] AnimalController e seus testes
+  - [x] ApiAnimalController (sem testes por enquanto)
 
 - [ ] Produtos:
 

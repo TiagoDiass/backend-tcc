@@ -1,5 +1,5 @@
-import express, { Express, Router } from 'express';
-import { servicesRoutes, transactionsRoutes } from 'routes';
+import express, { Express } from 'express';
+import { servicesRoutes, transactionsRoutes, animalsRoutes } from 'routes';
 
 class App {
   public readonly server: Express;
@@ -18,6 +18,7 @@ class App {
   routes() {
     this.server.use('/services', servicesRoutes);
     this.server.use('/transactions', transactionsRoutes);
+    this.server.use('/animals', animalsRoutes);
   }
 }
 
