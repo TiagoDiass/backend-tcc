@@ -2,7 +2,6 @@ import MongoAnimalRepository from './MongoAnimalRepository';
 import MongoConnection from 'adapters/database/connection/MongoConnection';
 import { mockAnimal } from '@testUtils/animalsMocks';
 import Animal from 'domain/entities/Animal/Animal';
-import Service from 'domain/entities/Service/Service';
 
 const COLLECTION_NAME = 'Animals';
 
