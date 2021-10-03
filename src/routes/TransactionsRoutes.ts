@@ -10,10 +10,10 @@ const apiTransactionController = new ApiTransactionController(
   new TransactionController(
     new MongoTransactionRepository(
       new MongoConnection({
-        address: 'localhost',
-        user: 'mongodb',
-        password: 'backend_tcc',
-        databaseName: 'BACKEND_TCC',
+        address: process.env.MONGODB_LOCAL_DEV_ADDRESS || '',
+        user: process.env.MONGODB_LOCAL_DEV_USER || '',
+        password: process.env.MONGODB_LOCAL_DEV_PASSWORD || '',
+        databaseName: process.env.MONGODB_LOCAL_DEV_DATABASE_NAME || '',
       })
     )
   )
