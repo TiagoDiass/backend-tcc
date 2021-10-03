@@ -7,10 +7,10 @@ const COLLECTION_NAME = 'Animals';
 
 describe('MongoDB Repository: AnimalRepository', () => {
   const mongoConnection = new MongoConnection({
-    address: 'localhost',
-    user: 'mongodb',
-    password: 'backend_tcc',
-    databaseName: 'BACKEND_TCC_TESTS',
+    address: process.env.MONGODB_TESTS_ADDRESS || '',
+    user: process.env.MONGODB_TESTS_USER || '',
+    password: process.env.MONGODB_TESTS_PASSWORD || '',
+    databaseName: process.env.MONGODB_TESTS_DATABASE_NAME || '',
   });
 
   const mongoAnimalRepository = new MongoAnimalRepository(mongoConnection);
