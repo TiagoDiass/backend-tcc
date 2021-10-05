@@ -46,7 +46,7 @@
   - [x] Serviço de domínio ListProducts e seus testes;
   - [ ] Serviço de domínio CreateProduct e seus testes;
   - [x] Serviço de domínio DeleteProduct e seus testes;
-  - [ ] Serviço de domínio GetProductById e seus testes;
+  - [x] Serviço de domínio GetProductById e seus testes;
   - [ ] Serviço de domínio EditProduct e seus testes;
 
 - [ ] Casos de ajuda:
