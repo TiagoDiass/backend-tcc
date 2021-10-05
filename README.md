@@ -42,8 +42,8 @@
 - [ ] Produtos:
 
   - [x] Entidade de Produto e seus testes;
-  - [ ] Repositório de produtos (MongoDB) e seus testes;
-  - [ ] Serviço de domínio ListProducts e seus testes;
+  - [x] Repositório de produtos (MongoDB) e seus testes;
+  - [x] Serviço de domínio ListProducts e seus testes;
   - [ ] Serviço de domínio CreateProduct e seus testes;
   - [ ] Serviço de domínio DeleteProduct e seus testes;
   - [ ] Serviço de domínio GetProductById e seus testes;
