@@ -47,7 +47,9 @@
   - [x] Serviço de domínio CreateProduct e seus testes;
   - [x] Serviço de domínio DeleteProduct e seus testes;
   - [x] Serviço de domínio GetProductById e seus testes;
-  - [ ] Serviço de domínio EditProduct e seus testes;
+  - [x] Serviço de domínio EditProduct e seus testes;
+  - [ ] ProductController e seus testes
+  - [ ] ApiProductController (sem testes por enquanto)
 
 - [ ] Casos de ajuda:
 
