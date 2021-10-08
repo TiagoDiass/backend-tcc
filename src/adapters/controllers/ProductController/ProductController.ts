@@ -53,7 +53,7 @@ export default class TransactionController {
         result: {
           message:
             createProductResponse.status === 201
-              ? 'Produto criado com sucesso'
+              ? 'Produto cadastrado com sucesso'
               : createProductResponse.error?.message,
 
           data: createProductResponse.result || null,
