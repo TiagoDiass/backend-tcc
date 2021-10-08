@@ -13,7 +13,7 @@ import {
   UpdateProduct,
 } from 'domain/services/ProductServices';
 
-export default class TransactionController {
+export default class ProductController {
   constructor(private readonly productRepository: IProductRepository) {}
 
   async listProducts(): Promise<ControllerMethodResult> {

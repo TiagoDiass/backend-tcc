@@ -39,7 +39,7 @@
   - [x] AnimalController e seus testes
   - [x] ApiAnimalController (sem testes por enquanto)
 
-- [ ] Produtos:
+- [x] Produtos:
 
   - [x] Entidade de Produto e seus testes;
   - [x] Repositório de produtos (MongoDB) e seus testes;
@@ -48,8 +48,8 @@
   - [x] Serviço de domínio DeleteProduct e seus testes;
   - [x] Serviço de domínio GetProductById e seus testes;
   - [x] Serviço de domínio EditProduct e seus testes;
-  - [ ] ProductController e seus testes
-  - [ ] ApiProductController (sem testes por enquanto)
+  - [x] ProductController e seus testes
+  - [x] ApiProductController (sem testes por enquanto)
 
 - [ ] Casos de ajuda:
 
