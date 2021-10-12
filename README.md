@@ -61,6 +61,11 @@
   - [ ] Serviço de domínio GetHelpCaseById e seus testes;
   - [ ] Serviço de domínio EditHelpCase e seus testes;
 
+- [ ] Adoções;
+- [ ] Medicamentos;
+- [ ] Clínicas parceiras;
+- [ ] Voluntários;
+
 `ainda vão ter mais entidades...`
 
 #### To do:

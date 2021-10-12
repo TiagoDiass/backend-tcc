@@ -1,6 +1,7 @@
 import InvalidServiceError from './InvalidServiceError';
 import InvalidTransactionError from './InvalidTransactionError';
 import InvalidAnimalError from './InvalidAnimalError';
+import InvalidMedicineError from './InvalidMedicineError';
 
 describe('Exceptions test', () => {
   it('InvalidTransactionError: it should have the correct message and type', () => {
@@ -19,5 +20,11 @@ describe('Exceptions test', () => {
     const error = new InvalidAnimalError([]);
     expect(error.message).toBe('Animal inválido');
     expect(error.type).toBe('invalid-animal-error');
+  });
+
+  it('InvalidMedicineError: it should have the correct message and type', () => {
+    const error = new InvalidMedicineError([]);
+    expect(error.message).toBe('Medicamento inválido');
+    expect(error.type).toBe('invalid-medicine-error');
   });
 });
