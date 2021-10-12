@@ -11,6 +11,14 @@ export interface ITransactionProperties {
   date: string;
 }
 
+/**
+ * @class Transaction
+ * @param {string} id - ID da transação
+ * @param {string} title - título da transação
+ * @param {number} value - valor da transação (em centavos, para facilitar o tratamento e cálculos)
+ * @param {'deposit' | 'withdraw'} type - tipo da transação
+ * @param {string} date - data da transação no formato YYYY-MM-DD
+ */
 export default class Transaction {
   public id: string;
   public title: string;
