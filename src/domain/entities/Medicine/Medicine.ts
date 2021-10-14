@@ -118,11 +118,11 @@ export default class Medicine {
   private amountValidation(amount: IMedicineProperties['amount']): FieldValidationReturn {
     const errors: string[] = [];
 
-    if (typeof amount.unit !== 'string' || typeof amount.value !== 'number') {
+    if (!amount || typeof amount.unit !== 'string' || typeof amount.value !== 'number') {
       errors.push(
         'quantidade do medicamento deve ser um objeto no formato { unit: string, value: number }'
       );
-    } else if (['mls', 'mgs', 'pill amount'].includes(amount.unit)) {
+    } else if (!['mls', 'mgs', 'pill amount'].includes(amount.unit)) {
       errors.push('unidade do medicament deve ser "mls", "mgs" ou "pill amount"');
     }
 
