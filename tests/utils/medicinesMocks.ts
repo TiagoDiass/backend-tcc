@@ -1,6 +1,6 @@
 import Medicine from 'domain/entities/Medicine/Medicine';
 import IMedicineRepository from 'domain/ports/MedicineRepository';
-import { IRequestGetMedicineByIdDTO } from 'domain/services/dto';
+import { IRequestDeleteMedicineDTO, IRequestGetMedicineByIdDTO } from 'domain/services/dto';
 import faker from 'faker';
 
 export const mockMedicineRepository = (): IMedicineRepository => ({
@@ -23,5 +23,9 @@ export const mockMedicine = (): Medicine =>
   });
 
 export const mockGetMedicineByIdDTO = (): IRequestGetMedicineByIdDTO => ({
+  id: faker.datatype.uuid(),
+});
+
+export const mockDeleteMedicineDTO = (): IRequestDeleteMedicineDTO => ({
   id: faker.datatype.uuid(),
 });
