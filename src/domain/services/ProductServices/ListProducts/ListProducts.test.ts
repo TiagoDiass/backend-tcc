@@ -2,7 +2,7 @@ import ListProducts from './ListProducts';
 import IProductRepository from 'domain/ports/ProductRepository';
 import { mockProduct, mockProductRepository } from '@testUtils/productsMocks';
 
-describe('Service: ListAnimals', () => {
+describe('Service: ListProducts', () => {
   it('should call productRepository.list() and return correctly', async () => {
     const productsToBeReturned = [mockProduct(), mockProduct()];
 
