@@ -1,6 +1,6 @@
 import Medicine from 'domain/entities/Medicine/Medicine';
 import IMedicineRepository from 'domain/ports/MedicineRepository';
-import {} from 'domain/services/dto';
+import { IRequestGetMedicineByIdDTO } from 'domain/services/dto';
 import faker from 'faker';
 
 export const mockMedicineRepository = (): IMedicineRepository => ({
@@ -21,3 +21,7 @@ export const mockMedicine = (): Medicine =>
       unit: faker.random.arrayElement(['mls', 'mgs', 'pill amount']),
     },
   });
+
+export const mockGetMedicineByIdDTO = (): IRequestGetMedicineByIdDTO => ({
+  id: faker.datatype.uuid(),
+});
