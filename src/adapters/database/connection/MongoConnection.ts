@@ -10,7 +10,7 @@ type AccessData = {
 };
 
 /**
- * Classe base para conexão com um banco de dados MongoDB.
+ * Base class to connect to a MongoDB database.
  * @class {MongoConnection}
  */
 export default class MongoConnection {
