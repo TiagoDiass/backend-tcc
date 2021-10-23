@@ -8,7 +8,8 @@
     "dev": "cross-env NODE_PATH=./src/ tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "test": "jest --no-cache",
     "test:watch": "yarn test --watch",
-    "test:band": "yarn test --runInBand"
+    "test:band": "yarn test --runInBand",
+    "docker:start": "docker-compose up --build -d"
   },
   "dependencies": {
     "cross-env": "^7.0.3",
