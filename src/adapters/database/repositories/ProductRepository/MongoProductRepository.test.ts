@@ -1,7 +1,6 @@
 import MongoProductRepository from './MongoProductRepository';
 import MongoConnection from 'adapters/database/connection/MongoConnection';
 import Product from 'domain/entities/Product/Product';
-import { mockService } from '@testUtils/servicesMocks';
 import { mockProduct } from '@testUtils/productsMocks';
 
 const COLLECTION_NAME = 'Products';
@@ -66,7 +65,7 @@ describe('MongoDB Repository: ServiceRepository', () => {
   });
 
   test('method: delete()', async () => {
-    const product = mockService();
+    const product = mockProduct();
 
     const dbCollection = (await mongoConnection.getConnection()).collection(COLLECTION_NAME);
 
