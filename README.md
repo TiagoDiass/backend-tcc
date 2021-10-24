@@ -62,7 +62,19 @@
   - [ ] Serviço de domínio EditHelpCase e seus testes;
 
 - [ ] Adoções;
+
 - [ ] Medicamentos;
+
+  - [x] Entidade de Caso de ajuda (Medicine) e seus testes;
+  - [x] Repositório de casos de ajuda (MongoDB) e seus testes;
+  - [x] Serviço de domínio ListMedicines e seus testes;
+  - [x] Serviço de domínio CreateMedicine e seus testes;
+  - [x] Serviço de domínio DeleteMedicine e seus testes;
+  - [x] Serviço de domínio GetMedicineById e seus testes;
+  - [x] Serviço de domínio UpdateMedicine e seus testes;
+  - [x] MedicineController e seus testes
+  - [ ] ApiMedicineController (sem testes por enquanto)
+
 - [ ] Clínicas parceiras;
 - [ ] Voluntários;
 
