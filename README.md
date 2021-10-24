@@ -63,7 +63,7 @@
 
 - [ ] Adoções;
 
-- [ ] Medicamentos;
+- [x] Medicamentos;
 
   - [x] Entidade de Caso de ajuda (Medicine) e seus testes;
   - [x] Repositório de casos de ajuda (MongoDB) e seus testes;
