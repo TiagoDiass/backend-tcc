@@ -77,11 +77,3 @@
 
 - [ ] Clínicas parceiras;
 - [ ] Voluntários;
-
-`ainda vão ter mais entidades...`
-
-#### To do:
-
-- [ ] adicionar verificação nos domain services ou controller para ver se os campos vieram no DTO.
-- [ ] adicionar testes end to end
-- [ ] adicionar repositório utilizando o MongoDB
