@@ -1,5 +1,11 @@
 import express, { Express } from 'express';
-import { servicesRoutes, transactionsRoutes, animalsRoutes, productsRoutes } from 'routes';
+import {
+  servicesRoutes,
+  transactionsRoutes,
+  animalsRoutes,
+  productsRoutes,
+  medicinesRoutes,
+} from 'routes';
 
 class App {
   public readonly server: Express;
@@ -20,6 +26,7 @@ class App {
     this.server.use('/transactions', transactionsRoutes);
     this.server.use('/animals', animalsRoutes);
     this.server.use('/products', productsRoutes);
+    this.server.use('/medicines', medicinesRoutes);
   }
 }
 

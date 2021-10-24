@@ -73,7 +73,7 @@
   - [x] Serviço de domínio GetMedicineById e seus testes;
   - [x] Serviço de domínio UpdateMedicine e seus testes;
   - [x] MedicineController e seus testes
-  - [ ] ApiMedicineController (sem testes por enquanto)
+  - [x] ApiMedicineController (sem testes por enquanto)
 
 - [ ] Clínicas parceiras;
 - [ ] Voluntários;
