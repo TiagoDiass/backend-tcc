@@ -6,6 +6,7 @@ import {
   productsRoutes,
   medicinesRoutes,
 } from 'routes';
+import cors from 'cors';
 
 class App {
   public readonly server: Express;
@@ -18,6 +19,7 @@ class App {
   }
 
   middlewares() {
+    this.server.use(cors());
     this.server.use(express.json());
   }
 
