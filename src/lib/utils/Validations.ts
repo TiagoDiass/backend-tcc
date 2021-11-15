@@ -36,4 +36,12 @@ export default class Validations {
     let re = new RegExp(/^[a-zA-Z0-9-_]+[:./\\]+([a-zA-Z0-9 -_./:=&"'?%+@#$!])+$/g);
     return re.test(url);
   }
+
+  /**
+   * verifica se o CEP informado é válido
+   */
+  static cep(cep: string) {
+    const pattern = /^[0-9]{5}-[0-9]{3}$/;
+    return pattern.test(cep);
+  }
 }
