@@ -44,4 +44,12 @@ export default class Validations {
     const pattern = /^[0-9]{5}-[0-9]{3}$/;
     return pattern.test(cep);
   }
+
+  static brazilianUF(uf: string) {
+    if (uf.length != 2) return false;
+    let re = new RegExp(
+      /AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO/i
+    );
+    return re.test(uf);
+  }
 }

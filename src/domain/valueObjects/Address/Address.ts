@@ -150,8 +150,8 @@ export default class Address {
 
     if (typeof state !== 'string') {
       errors.push('Estado do endereço deve ser uma string');
-    } else if (state.length !== 2) {
-      errors.push('Estado do endereço deve conter somente 2 caracteres');
+    } else if (!Validations.brazilianUF(state)) {
+      errors.push('Estado do endereço informado é inválido');
     }
 
     return {

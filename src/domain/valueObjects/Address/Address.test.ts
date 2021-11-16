@@ -194,6 +194,6 @@ describe('ValueObject: Address', () => {
     }
 
     expect(error.type).toBe('invalid-address-error');
-    expect(error.errorsList).toEqual(['Estado do endereço deve conter somente 2 caracteres']);
+    expect(error.errorsList).toEqual(['Estado do endereço informado é inválido']);
   });
 });
