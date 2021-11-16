@@ -11,7 +11,9 @@ export interface IAddressProperties {
   city: string;
   state: string;
 }
-
+/**
+ * @class Address - ValueObject para tratar endereços
+ */
 export default class Address {
   public cep: string;
   public street: string;
