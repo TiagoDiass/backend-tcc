@@ -101,7 +101,7 @@ export default class Address {
     const errors: string[] = [];
 
     if (typeof number !== 'number' || number <= 0) {
-      errors.push('Número do endereço deve ser do tipo number e maior que 0');
+      errors.push('Número do endereço deve ser do tipo number e maior que zero');
     }
 
     return {
@@ -151,7 +151,7 @@ export default class Address {
     if (typeof state !== 'string') {
       errors.push('Estado do endereço deve ser uma string');
     } else if (state.length !== 2) {
-      errors.push('Cidade do endereço deve conter somente 2 caracteres');
+      errors.push('Estado do endereço deve conter somente 2 caracteres');
     }
 
     return {
