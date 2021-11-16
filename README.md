@@ -65,8 +65,8 @@
 
 - [x] Medicamentos;
 
-  - [x] Entidade de Caso de ajuda (Medicine) e seus testes;
-  - [x] Repositório de casos de ajuda (MongoDB) e seus testes;
+  - [x] Entidade de Medicamento (Medicine) e seus testes;
+  - [x] Repositório de medicamentos (MongoDB) e seus testes;
   - [x] Serviço de domínio ListMedicines e seus testes;
   - [x] Serviço de domínio CreateMedicine e seus testes;
   - [x] Serviço de domínio DeleteMedicine e seus testes;
@@ -76,4 +76,15 @@
   - [x] ApiMedicineController (sem testes por enquanto)
 
 - [ ] Clínicas parceiras;
+
+  - [x] Entidade de Clínicas parceiras (PartnerClinic) e seus testes;
+  - [ ] Repositório de clínicas parceiras (MongoDB) e seus testes;
+  - [x] Serviço de domínio ListPartnerClinics e seus testes;
+  - [ ] Serviço de domínio CreatePartnerClinic e seus testes;
+  - [ ] Serviço de domínio DeletePartnerClinic e seus testes;
+  - [ ] Serviço de domínio GetPartnerClinicById e seus testes;
+  - [ ] Serviço de domínio UpdatePartnerClinic e seus testes;
+  - [ ] PartnerClinicController e seus testes
+  - [ ] ApiPartnerClinicController (sem testes por enquanto)
+
 - [ ] Voluntários;
