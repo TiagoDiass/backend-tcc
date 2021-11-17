@@ -83,7 +83,7 @@
   - [x] Serviço de domínio CreatePartnerClinic e seus testes;
   - [x] Serviço de domínio DeletePartnerClinic e seus testes;
   - [x] Serviço de domínio GetPartnerClinicById e seus testes;
-  - [ ] Serviço de domínio UpdatePartnerClinic e seus testes;
+  - [x] Serviço de domínio UpdatePartnerClinic e seus testes;
   - [ ] PartnerClinicController e seus testes
   - [ ] ApiPartnerClinicController (sem testes por enquanto)
 

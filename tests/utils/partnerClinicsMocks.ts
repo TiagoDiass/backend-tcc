@@ -4,6 +4,7 @@ import {
   IRequestCreatePartnerClinicDTO,
   IRequestDeletePartnerClinicDTO,
   IRequestGetPartnerClinicByIdDTO,
+  IRequestUpdatePartnerClinicDTO,
 } from 'domain/services/dto';
 import { Address } from 'domain/valueObjects';
 import faker from 'faker/locale/pt_BR';
@@ -55,4 +56,9 @@ export const mockDeletePartnerClinicDTO = (): IRequestDeletePartnerClinicDTO => 
 
 export const mockGetPartnerClinicByIdDTO = (): IRequestGetPartnerClinicByIdDTO => ({
   id: faker.datatype.uuid(),
+});
+
+export const mockUpdatePartnerClinicDTO = (): IRequestUpdatePartnerClinicDTO => ({
+  id: faker.datatype.uuid(),
+  ...mockCreatePartnerClinicDTO(),
 });
