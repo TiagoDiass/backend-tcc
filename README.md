@@ -80,7 +80,7 @@
   - [x] Entidade de Clínicas parceiras (PartnerClinic) e seus testes;
   - [ ] Repositório de clínicas parceiras (MongoDB) e seus testes;
   - [x] Serviço de domínio ListPartnerClinics e seus testes;
-  - [ ] Serviço de domínio CreatePartnerClinic e seus testes;
+  - [x] Serviço de domínio CreatePartnerClinic e seus testes;
   - [x] Serviço de domínio DeletePartnerClinic e seus testes;
   - [x] Serviço de domínio GetPartnerClinicById e seus testes;
   - [ ] Serviço de domínio UpdatePartnerClinic e seus testes;

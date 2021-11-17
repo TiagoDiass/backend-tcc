@@ -1,6 +1,7 @@
 import PartnerClinic from 'domain/entities/PartnerClinic/PartnerClinic';
 import IPartnerClinicRepository from 'domain/ports/PartnerClinicRepository';
 import {
+  IRequestCreatePartnerClinicDTO,
   IRequestDeletePartnerClinicDTO,
   IRequestGetPartnerClinicByIdDTO,
 } from 'domain/services/dto';
@@ -31,6 +32,22 @@ export const mockPartnerClinic = (): PartnerClinic =>
       state: faker.random.arrayElement(BRAZILIAN_STATES),
     }),
   });
+
+export const mockCreatePartnerClinicDTO = (): IRequestCreatePartnerClinicDTO => ({
+  name: faker.random.words(2),
+  cnpj: '26186630000196', // faker cannot generate random cnpj
+  email: faker.internet.email(),
+  phone: faker.phone.phoneNumber('###########'),
+  address: {
+    cep: faker.address.zipCode('#####-###'),
+    street: faker.address.streetName(),
+    number: faker.datatype.number(),
+    district: faker.address.city(),
+    city: faker.address.city(),
+    state: faker.random.arrayElement(BRAZILIAN_STATES),
+    complement: faker.random.word(),
+  },
+});
 
 export const mockDeletePartnerClinicDTO = (): IRequestDeletePartnerClinicDTO => ({
   id: faker.datatype.uuid(),

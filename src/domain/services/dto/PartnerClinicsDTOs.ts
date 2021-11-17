@@ -1,6 +1,20 @@
 import { IPartnerClinicProperties } from 'domain/entities/PartnerClinic/PartnerClinic';
 
-export type IRequestCreatePartnerClinicDTO = Omit<IPartnerClinicProperties, 'id'>;
+export type IRequestCreatePartnerClinicDTO = {
+  name: string;
+  email: string;
+  phone: string;
+  cnpj: string;
+  address: {
+    cep: string;
+    street: string;
+    number: number;
+    complement?: string;
+    district: string;
+    city: string;
+    state: string;
+  };
+};
 
 export type IRequestGetPartnerClinicByIdDTO = { id: string };
 
