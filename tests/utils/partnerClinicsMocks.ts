@@ -1,5 +1,6 @@
 import PartnerClinic from 'domain/entities/PartnerClinic/PartnerClinic';
 import IPartnerClinicRepository from 'domain/ports/PartnerClinicRepository';
+import { IRequestDeletePartnerClinicDTO } from 'domain/services/dto';
 import { Address } from 'domain/valueObjects';
 import faker from 'faker/locale/pt_BR';
 import { BRAZILIAN_STATES } from './constants/brazilianStates';
@@ -27,3 +28,7 @@ export const mockPartnerClinic = (): PartnerClinic =>
       state: faker.random.arrayElement(BRAZILIAN_STATES),
     }),
   });
+
+export const mockDeletePartnerClinicDTO = (): IRequestDeletePartnerClinicDTO => ({
+  id: faker.datatype.uuid(),
+});
