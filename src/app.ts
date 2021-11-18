@@ -5,6 +5,7 @@ import {
   animalsRoutes,
   productsRoutes,
   medicinesRoutes,
+  partnerClinicsRoutes,
 } from 'routes';
 import cors from 'cors';
 
@@ -29,6 +30,7 @@ class App {
     this.server.use('/animals', animalsRoutes);
     this.server.use('/products', productsRoutes);
     this.server.use('/medicines', medicinesRoutes);
+    this.server.use('/partner-clinics', partnerClinicsRoutes);
   }
 }
 

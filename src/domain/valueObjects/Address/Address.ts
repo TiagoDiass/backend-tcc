@@ -23,7 +23,13 @@ export default class Address {
   public city: string;
   public state: string;
 
-  constructor({ cep, street, number, complement = '', district, city, state }: IAddressProperties) {
+  constructor(address: IAddressProperties) {
+    if (!address) {
+      throw new InvalidAddressError(['Endereço não pode ser nulo ou undefined']);
+    }
+
+    const { cep, street, number, complement = '', district, city, state } = address;
+
     this.cep = cep;
     this.street = street;
     this.number = number;

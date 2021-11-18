@@ -6,3 +6,4 @@ export { default as transactionsRoutes } from './TransactionsRoutes';
 export { default as animalsRoutes } from './AnimalsRoutes';
 export { default as productsRoutes } from './ProductsRoutes';
 export { default as medicinesRoutes } from './MedicinesRoutes';
+export { default as partnerClinicsRoutes } from './PartnerClinicsRoutes';
