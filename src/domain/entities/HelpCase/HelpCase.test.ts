@@ -107,13 +107,83 @@ describe('Entity: HelpCase', () => {
     ]);
   });
 
-  it.todo('should throw an InvalidHelpCaseError if pictures is not an array');
+  it('should throw an InvalidHelpCaseError if pictures is not an array', () => {
+    let error;
 
-  it.todo('should throw an InvalidHelpCaseError if some picture is not a string');
+    try {
+      new HelpCase({
+        ...validHelpCase,
+        pictures: 123 as unknown as string[],
+      });
+    } catch (err: any) {
+      error = err;
+    }
 
-  it.todo('should throw an InvalidHelpCaseError if some picture is not a valid url');
+    expect(error.type).toBe('invalid-help-case-error');
+    expect(error.errorsList).toEqual(['Fotos do caso deve ser uma lista de URLs']);
+  });
 
-  it.todo('should throw an InvalidHelpCaseError if poolMoneyUrl is not a null or a string');
+  it('should throw an InvalidHelpCaseError if some picture is not a string', () => {
+    let error;
 
-  it.todo('should throw an InvalidHelpCaseError if poolMoneyUrl is not a valid url');
+    try {
+      new HelpCase({
+        ...validHelpCase,
+        pictures: [123] as unknown as string[],
+      });
+    } catch (err: any) {
+      error = err;
+    }
+
+    expect(error.type).toBe('invalid-help-case-error');
+    expect(error.errorsList).toEqual(['A URL da 1ª foto não é uma string']);
+  });
+
+  it('should throw an InvalidHelpCaseError if some picture is not a valid url', () => {
+    let error;
+
+    try {
+      new HelpCase({
+        ...validHelpCase,
+        pictures: ['invalid-url'] as unknown as string[],
+      });
+    } catch (err: any) {
+      error = err;
+    }
+
+    expect(error.type).toBe('invalid-help-case-error');
+    expect(error.errorsList).toEqual(['A URL da 1ª foto está inválida']);
+  });
+
+  it('should throw an InvalidHelpCaseError if poolMoneyUrl is not a null or a string', () => {
+    let error;
+
+    try {
+      new HelpCase({
+        ...validHelpCase,
+        poolMoneyUrl: 123 as unknown as string,
+      });
+    } catch (err: any) {
+      error = err;
+    }
+
+    expect(error.type).toBe('invalid-help-case-error');
+    expect(error.errorsList).toEqual(['URL da vaquinha do caso deve ser uma string ou null']);
+  });
+
+  it('should throw an InvalidHelpCaseError if poolMoneyUrl is not a valid url', () => {
+    let error;
+
+    try {
+      new HelpCase({
+        ...validHelpCase,
+        poolMoneyUrl: 'invalid-url',
+      });
+    } catch (err: any) {
+      error = err;
+    }
+
+    expect(error.type).toBe('invalid-help-case-error');
+    expect(error.errorsList).toEqual(['URL da vaquinha do caso deve ser uma URL válida']);
+  });
 });
