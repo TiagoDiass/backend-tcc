@@ -4,6 +4,7 @@ import InvalidAnimalError from './InvalidAnimalError';
 import InvalidMedicineError from './InvalidMedicineError';
 import InvalidAddressError from './InvalidAddressError';
 import InvalidPartnerClinicError from './InvalidPartnerClinicError';
+import InvalidHelpCaseError from './InvalidHelpCaseError';
 
 describe('Exceptions test', () => {
   it('InvalidTransactionError: it should have the correct message and type', () => {
@@ -40,5 +41,11 @@ describe('Exceptions test', () => {
     const error = new InvalidPartnerClinicError([]);
     expect(error.message).toBe('Clínica parceira inválida');
     expect(error.type).toBe('invalid-partner-clinic-error');
+  });
+
+  it('InvalidHelpCaseError: it should have the correct message and type', () => {
+    const error = new InvalidHelpCaseError([]);
+    expect(error.message).toBe('Caso de ajuda inválido');
+    expect(error.type).toBe('invalid-help-case-error');
   });
 });
