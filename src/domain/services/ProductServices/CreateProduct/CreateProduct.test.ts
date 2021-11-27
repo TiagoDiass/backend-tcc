@@ -1,6 +1,5 @@
 import CreateProduct from './CreateProduct';
 import { IRequestCreateProductDTO } from 'domain/services/dto';
-import { mockTransactionRepository } from '@testUtils/transactionsMocks';
 import IProductRepository from 'domain/ports/ProductRepository';
 import { mockProductRepository } from '@testUtils/productsMocks';
 
