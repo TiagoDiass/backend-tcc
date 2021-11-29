@@ -53,13 +53,16 @@
 
 - [ ] Casos de ajuda:
 
-  - [ ] Entidade de Caso de ajuda (HelpCase) e seus testes;
-  - [ ] Repositório de casos de ajuda (MongoDB) e seus testes;
-  - [ ] Serviço de domínio ListHelpCases e seus testes;
-  - [ ] Serviço de domínio CreateHelpCase e seus testes;
-  - [ ] Serviço de domínio DeleteHelpCase e seus testes;
-  - [ ] Serviço de domínio GetHelpCaseById e seus testes;
-  - [ ] Serviço de domínio EditHelpCase e seus testes;
+  - [x] Entidade de Caso de ajuda (HelpCase) e seus testes;
+  - [x] Repositório de casos de ajuda (MongoDB) e seus testes;
+  - [x] Serviço de domínio ListHelpCases e seus testes;
+  - [x] Serviço de domínio CreateHelpCase e seus testes;
+  - [x] Serviço de domínio DeleteHelpCase e seus testes;
+  - [x] Serviço de domínio GetHelpCaseById e seus testes;
+  - [x] Serviço de domínio EditHelpCase e seus testes;
+  - [x] HelpCaseController
+  - [ ] Testes do HelpCaseController
+  - [x] ApiHelpCaseController (sem testes por enquanto)
 
 - [ ] Adoções;
 
